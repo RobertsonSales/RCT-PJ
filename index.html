@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { 
-            font-family: 'Inter', system-ui, sans-serif; 
+            font-family: 'Inter', system-ui, sans-serif;
+            box-sizing: border-box;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -228,50 +229,39 @@
             backdrop-filter: blur(12px);
         }
 
-        /* ===================================================================
-           ESTILOS ESPECÍFICOS PARA PDF - MARGENS E CENTRALIZAÇÃO CORRIGIDAS
-           =================================================================== */
-        
+        /* ESTILOS ESPECÍFICOS PARA PDF - CORREÇÃO DE OVERFLOW */
         #pdf-content {
             font-family: 'Inter', sans-serif;
             background: white;
-            padding: 0;
-            margin: 0;
-            font-size: 13px;
+            margin: 0 auto;
+            font-size: 14px;
             line-height: 1.5;
-            /* Remover largura fixa - deixar o html2pdf controlar */
-            width: 100%;
-            max-width: 100%;
+            width: 190mm;
+            max-width: 190mm;
         }
 
         .pdf-page {
-            /* 
-             * CORREÇÃO CRÍTICA:
-             * - A4: 210mm x 297mm
-             * - Margens: 20mm em todos os lados
-             * - Área útil: 170mm x 257mm
-             * - Box-sizing: border-box garante que padding seja incluído
-             */
-            width: 100%;
-            min-height: 257mm; /* 297mm - 40mm (margens top+bottom) */
-            padding: 20mm;  /* Margens uniformes de 20mm */
+            width: 190mm;
+            max-width: 190mm;
+            min-height: 277mm;
+            padding: 10mm 15mm;
             box-sizing: border-box;
             position: relative;
-            page-break-after: always;
+            overflow-x: hidden;
             page-break-inside: avoid;
         }
 
-        /* Remover page-break do último elemento */
-        .pdf-page:last-child {
-            page-break-after: auto;
+        /* Quebra de página entre elementos .pdf-page */
+        .pdf-page + .pdf-page {
+            page-break-before: always;
         }
 
         /* Evitar quebra dentro de elementos importantes */
         .pdf-section-block {
             page-break-inside: avoid;
             margin-bottom: 12px;
-            width: 100%; /* Largura total da área útil */
-            max-width: 100%; /* Remover limitação de largura */
+            width: 100%;
+            max-width: 100%;
         }
 
         .pdf-verba-card {
@@ -288,7 +278,6 @@
             margin-bottom: 15px;
             page-break-inside: avoid;
             width: 100%;
-            box-sizing: border-box;
         }
 
         .pdf-title {
@@ -327,7 +316,11 @@
             border-radius: 8px;
             padding: 12px;
             border-left: 3px solid #8b5cf6;
-            box-sizing: border-box;
+            width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
         }
 
         .pdf-info-box.alt {
@@ -347,7 +340,10 @@
             font-size: 13px;
             font-weight: 700;
             color: #1f2937;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
             word-break: break-word;
+            hyphens: auto;
         }
 
         .pdf-value-large {
@@ -357,14 +353,14 @@
 
         .pdf-verba-card {
             background: white;
-            border: 2px solid #e5e7eb;
+            border: 1px solid #e5e7eb;
             border-radius: 8px;
             padding: 12px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 8px;
-            box-sizing: border-box;
+            width: 100%;
         }
 
         .pdf-verba-card.destaque {
@@ -388,6 +384,9 @@
             font-weight: 700;
             color: #1f2937;
             margin-bottom: 4px;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         .pdf-verba-info p {
@@ -395,13 +394,17 @@
             color: #6b7280;
             margin: 0;
             line-height: 1.4;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         .pdf-verba-valor {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             color: #059669;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .pdf-verba-card.destaque .pdf-verba-valor {
@@ -421,7 +424,6 @@
             text-align: center;
             page-break-inside: avoid;
             width: 100%;
-            box-sizing: border-box;
         }
 
         .pdf-total-label {
@@ -434,7 +436,7 @@
         }
 
         .pdf-total-valor {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
             letter-spacing: -1px;
         }
@@ -453,7 +455,6 @@
             border-left: 3px solid #8b5cf6;
             page-break-inside: avoid;
             width: 100%;
-            box-sizing: border-box;
         }
 
         .pdf-quitacao h4 {
@@ -464,18 +465,22 @@
         }
 
         .pdf-quitacao p {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.6;
             color: #4b5563;
             margin-bottom: 8px;
             text-align: justify;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
         }
 
         .pdf-assinaturas {
-            margin-top: 40px;
+            margin-top: 25px;
             display: flex;
             justify-content: space-between;
-            gap: 30px;
+            gap: 20px;
             page-break-inside: avoid;
             width: 100%;
         }
@@ -489,14 +494,16 @@
         .pdf-linha-assinatura {
             border-top: 2px solid #1f2937;
             margin-bottom: 8px;
-            padding-top: 50px; /* Espaço para assinatura manuscrita */
+            padding-top: 8px;
         }
 
         .pdf-assinatura-nome {
             font-weight: 700;
             font-size: 12px;
             color: #1f2937;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
             word-break: break-word;
         }
 
@@ -509,20 +516,20 @@
 
         .pdf-footer {
             position: absolute;
-            bottom: 15mm;
-            left: 20mm;
-            right: 20mm;
+            bottom: 10mm;
+            left: 15mm;
+            right: 15mm;
             text-align: center;
             font-size: 10px;
             color: #9ca3af;
             border-top: 1px solid #e5e7eb;
-            padding-top: 8px;
+            padding-top: 10px;
         }
 
         .pdf-page-number {
             position: absolute;
             bottom: 10mm;
-            right: 20mm;
+            right: 15mm;
             font-size: 10px;
             color: #9ca3af;
         }
@@ -813,7 +820,7 @@
 
                     <div class="pdf-info-grid">
                         <div class="pdf-info-box">
-                            <div class="pdf-label">Período Contratual</div>
+                            <div class="pdf-label">Período da Relação Contratual</div>
                             <div class="pdf-value" id="pdf-periodo"></div>
                         </div>
                         <div class="pdf-info-box alt">
@@ -864,7 +871,7 @@
                     <h4>📝 Termo de Quitação Geral</h4>
                     <p>O Prestador declara que concorda integralmente com os valores das verbas rescisórias constantes neste documento e que recebeu o pagamento total de todas as quantias devidas em razão do encerramento da relação contratual de prestação de serviços.</p>
                     <p>Desta forma, o Prestador dá plena, geral, irrevogável e irretratável quitação ao Contratante, nada mais tendo a reclamar, seja na Justiça do Trabalho, Justiça Comum ou fora dela, a qualquer título, em razão do contrato ora rescindido.</p>
-                    <p style="margin-top: 12px; font-weight: 600; color: #1f2937;">Este documento foi gerado em duas vias de igual teor e forma, ficando uma em poder de ambas as partes.</p>
+                    <p style="margin-top: 12px; font-weight: 600; color: #1f2937;">Este documento foi emitido em duas vias de igual teor e forma e deve ser assinado por ambas as partes.</p>
                 </div>
 
                 <div class="pdf-assinaturas">
@@ -1236,43 +1243,37 @@
 
             const element = document.getElementById('pdf-content');
 
-            /* ===============================================================
-             * CONFIGURAÇÃO CORRIGIDA DO HTML2PDF
-             * ===============================================================
-             * MUDANÇAS CRÍTICAS:
-             * 1. margin: [0, 0, 0, 0] - Remove margens do html2pdf
-             *    (CSS .pdf-page já tem padding de 20mm)
-             * 2. scale: 1.5 - Reduzido de 2 para evitar problemas de escala
-             * 3. windowWidth/windowHeight: Simulam viewport A4
-             * =============================================================== */
             const opt = {
-                margin: [0, 0, 0, 0],  // SEM MARGENS - CSS controla tudo
+                margin: [10, 10, 10, 10],
                 filename: `RCT-PJ_Rescisao_${calculoData.prestador.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`,
-                image: { type: 'jpeg', quality: 0.95 },
+                image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { 
-                    scale: 1.5,  // Escala reduzida para melhor compatibilidade
+                    scale: 2,
                     useCORS: true,
                     letterRendering: true,
-                    scrollY: 0,
-                    scrollX: 0,
-                    windowWidth: 794,  // A4 width em pixels (210mm @ 96dpi)
-                    windowHeight: 1123  // A4 height em pixels (297mm @ 96dpi)
+                    scrollY: 0
                 },
                 jsPDF: { 
                     unit: 'mm', 
                     format: 'a4', 
-                    orientation: 'portrait',
-                    compress: true
+                    orientation: 'portrait'
                 },
                 pagebreak: { 
-                    mode: ['css', 'legacy'],
+                    mode: ['css-class'],
                     before: [],
-                    after: ['.pdf-page'],
+                    after: [],
                     avoid: ['.pdf-section-block', '.pdf-verba-card', '.pdf-total-box', '.pdf-quitacao', '.pdf-assinaturas']
                 }
             };
 
-            html2pdf().set(opt).from(element).save();
+            html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+                const totalPages = pdf.internal.getNumberOfPages();
+                for (let i = totalPages; i > 0; i--) {
+                    if (i > 3) {
+                        pdf.deletePage(i);
+                    }
+                }
+            }).save();
         }
 
         function closeModal() {
@@ -1298,12 +1299,7 @@
             const multaInfo = document.getElementById('multa_info');
             avisoCheck.addEventListener('change', () => multaInfo.classList.toggle('hidden', avisoCheck.checked));
 
-            console.log('%c✅ RCT-PJ - MARGENS CORRIGIDAS! v2.0', 'color:#10b981; font-weight:700; font-size:16px; background:#d1fae5; padding:8px; border-radius:4px;');
-            console.log('%c📄 Configurações do PDF:', 'font-weight:600; color:#8b5cf6;');
-            console.log('   • Margens html2pdf: 0mm (controladas por CSS)');
-            console.log('   • Padding das páginas: 20mm uniformes');
-            console.log('   • Área útil: 170mm x 257mm');
-            console.log('   • Escala: 1.5 (otimizada)');
+            console.log('%c✅ RCT-PJ - Conteúdo Centralizado!', 'color:#8b5cf6; font-weight:600; font-size:14px;');
         });
     </script>
 </body>
