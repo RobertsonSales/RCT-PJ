@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCT-PJ • Rescisão Contratual PJ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { 
+            font-family: 'Inter', system-ui, sans-serif; 
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Gradientes sofisticados */
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+
+        .gradient-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #6366f1 100%);
+        }
+
+        .gradient-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+        }
+
+        /* Efeitos de glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-dark {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Inputs estilizados */
+        .input-premium {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #e2e8f0;
+        }
+        .input-premium:focus {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Cards com hover suave */
+        .card-premium {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-premium:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Animações de entrada */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        /* Estilos específicos para o PDF */
+        #pdf-content {
+            font-family: 'Inter', sans-serif;
+            background: white;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pdf-header {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .pdf-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .pdf-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .pdf-section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .pdf-section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .pdf-field {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .pdf-label {
+            font-weight: 600;
+            color: #64748b;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .pdf-value {
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        .pdf-verba-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pdf-verba-card.destaque {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .pdf-verba-card.multa {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .pdf-verba-info h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .pdf-verba-info p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0;
+        }
+
+        .pdf-verba-valor {
+            font-size: 22px;
+            font-weight: 800;
+            color: #059669;
+        }
+
+        .pdf-verba-card.destaque .pdf-verba-valor {
+            color: #d97706;
+        }
+
+        .pdf-verba-card.multa .pdf-verba-valor {
+            color: #dc2626;
+        }
+
+        .pdf-total {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .pdf-total-label {
+            font-size: 16px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .pdf-total-valor {
+            font-size: 42px;
+            font-weight: 800;
+        }
+
+        .pdf-quitacao {
+            margin-top: 30px;
+            padding: 24px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .pdf-quitacao h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .pdf-quitacao p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .pdf-assinaturas {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pdf-assinatura {
+            width: 45%;
+            text-align: center;
+        }
+
+        .pdf-linha-assinatura {
+            border-top: 2px solid #1e293b;
+            margin-bottom: 8px;
+            padding-top: 8px;
+        }
+
+        .pdf-assinatura-nome {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        .pdf-assinatura-cargo {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .pdf-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+
+        /* Estilos do formulário melhorados */
+        .section-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 20px;
+        }
+
+        .input-with-icon {
+            padding-left: 48px !important;
+        }
+
+        .checkbox-premium {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .checkbox-premium:checked {
+            background: #0ea5e9;
+            border-color: #0ea5e9;
+        }
+
+        .checkbox-premium:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Botões premium */
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #6366f1 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Cards de resultado */
+        .result-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            border-color: #0ea5e9;
+            box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.2);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Modal aprimorado */
+        .modal-overlay {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Scrollbar estilizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-slate-200">
+    <!-- Navbar Premium -->
+    <nav class="glass sticky top-0 z-50 border-b border-slate-200/20">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 gradient-primary rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+                        📋
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">RCT-PJ</h1>
+                        <p class="text-xs text-slate-500 font-medium tracking-wider uppercase">Rescisão Contratual • Prestador PJ</p>
+                    </div>
+                </div>
+                <button onclick="resetForm()" 
+                        class="flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-all text-sm">
+                    <span class="text-lg">⟳</span>
+                    <span>Nova Rescisão</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 py-10">
+        <!-- Header -->
+        <div class="text-center mb-10 animate-slide-up">
+            <h2 class="text-4xl font-bold text-white mb-3 tracking-tight">Cálculo de Rescisão Contratual</h2>
+            <p class="text-slate-400 text-lg">Gratificação Especial • Compensação por Serviços Adicionais • Resíduo Contratual</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- FORMULÁRIO PREMIUM -->
+            <div class="lg:col-span-7">
+                <div class="glass rounded-3xl shadow-2xl p-8 card-premium">
+                    <div class="section-header mb-6">
+                        <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                            <span class="w-10 h-10 bg-sky-100 rounded-xl flex items-center justify-center text-sky-600">📝</span>
+                            Informações da Rescisão
+                        </h3>
+                        <p class="text-slate-500 text-sm mt-2">Preencha os dados abaixo para calcular as verbas rescisórias</p>
+                    </div>
+
+                    <form id="rescisaoForm" onsubmit="event.preventDefault(); calcularRescisao();">
+                        <div class="space-y-6">
+                            <!-- Grid 2 colunas para dados das partes -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <!-- Contratante -->
+                                <div class="space-y-4">
+                                    <div class="input-group">
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Contratante (Razão Social)</label>
+                                        <div class="relative">
+                                            <span class="input-icon">🏢</span>
+                                            <input type="text" id="contratante" value="Tech Solutions LTDA" 
+                                                   class="input-premium input-with-icon w-full rounded-xl px-4 py-3 text-slate-900 bg-slate-50" required>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">CNPJ do Contratante</label>
+                                        <div class="relative">
+                                            <span class="input-icon">#</span>
+                                            <input type="text" id="cnpj_contratante" value="12.345.678/0001-90" 
+                                                   class="input-premium input-with-icon w-full rounded-xl px-4 py-3 text-slate-900 bg-slate-50" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Prestador -->
+                                <div class="space-y-4">
+                                    <div class="input-group">
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">Prestador (Razão Social / Nome)</label>
+                                        <div class="relative">
+                                            <span class="input-icon">👤</span>
+                                            <input type="text" id="prestador" value="João Silva - MEI" 
+                                                   class="input-premium input-with-icon w-full rounded-xl px-4 py-3 text-slate-900 bg-slate-50" required>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label class="block text-sm font-semibold text-slate-700 mb-2">CNPJ / CPF do Prestador</label>
+                                        <div class="relative">
+                                            <span class="input-icon">#</span>
+                                            <input type="text" id="cnpj_prestador" value="12.345.678/0001-99" 
+                                                   class="input-premium input-with-icon w-full rounded-xl px-4 py-3 text-slate-900 bg-slate-50" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Remuneração e Natureza -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4 border-t border-slate-100">
+                                <div class="input-group">
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Remuneração Mensal (R$)</label>
+                                    <div class="relative">
+                                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-slate-400 font-semibold">R$</span>
+                                        <input type="number" id="remuneracao" step="0.01" value="8500" 
+                                               class="input-premium w-full rounded-xl pl-12 pr-4 py-3 text-2xl font-bold text-slate-900 bg-slate-50" required>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Natureza do Serviço</label>
+                                    <div class="relative">
+                                        <span class="input-icon">💼</span>
+                                        <input type="text" id="natureza" value="Desenvolvimento e manutenção de sistemas web" 
+                                               class="input-premium input-with-icon w-full rounded-xl px-4 py-3 text-slate-900 bg-slate-50" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Datas -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-100">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Data de Início</label>
+                                    <input type="date" id="data_inicio" value="2025-01-15" 
+                                           class="input-premium w-full rounded-xl px-4 py-3 text-slate-900 bg-slate-50" required onchange="verificarDuracaoContrato()">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Data de Término</label>
+                                    <input type="date" id="data_termino" value="2026-03-30" 
+                                           class="input-premium w-full rounded-xl px-4 py-3 text-slate-900 bg-slate-50" required onchange="verificarDuracaoContrato()">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-2">Data de Pagamento</label>
+                                    <input type="date" id="data_pagamento" value="2026-03-30" 
+                                           class="input-premium w-full rounded-xl px-4 py-3 text-slate-900 bg-slate-50" required>
+                                </div>
+                            </div>
+
+                            <!-- Checkboxes estilizados -->
+                            <div class="space-y-4 pt-4">
+                                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200">
+                                    <label class="flex items-start gap-4 cursor-pointer group">
+                                        <input type="checkbox" id="remuneracao_anterior_paga" class="checkbox-premium mt-1">
+                                        <div>
+                                            <span class="font-semibold text-slate-800 block mb-1">Remuneração da competência anterior já foi paga integralmente</span>
+                                            <p class="text-sm text-slate-500">O Resíduo Contratual considerará apenas os dias excedentes ao mês anterior.</p>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="bg-slate-50 rounded-xl p-5 border border-slate-200">
+                                    <label class="flex items-start gap-4 cursor-pointer group">
+                                        <input type="checkbox" id="aviso_previo_concedido" checked class="checkbox-premium mt-1">
+                                        <div>
+                                            <span class="font-semibold text-slate-800 block mb-1">O prestador concedeu aviso prévio de 30 dias</span>
+                                            <div id="multa_info" class="hidden mt-2">
+                                                <span class="badge badge-danger">
+                                                    <span class="mr-1">⚠️</span> Multa contratual de uma remuneração mensal integral será aplicada
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div id="compensatoria_container" class="hidden bg-amber-50 rounded-xl p-5 border border-amber-200">
+                                    <label class="flex items-start gap-4 cursor-pointer group">
+                                        <input type="checkbox" id="compensatoria_anual_paga" checked class="checkbox-premium mt-1">
+                                        <div>
+                                            <span class="font-semibold text-amber-900 block mb-1">Houve pagamento da Verba Compensatória Anual?</span>
+                                            <p class="text-sm text-amber-700">Se marcado como "Não", será adicionada uma remuneração mensal + 1/3 às verbas rescisórias.</p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="pt-4">
+                                <button type="submit"
+                                        class="btn-primary w-full py-4 text-white text-lg font-bold rounded-xl shadow-xl">
+                                    CALCULAR VERBAS RESCISÓRIAS
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- DASHBOARD PREMIUM -->
+            <div id="dashboard" class="lg:col-span-5 hidden">
+                <div class="sticky top-24">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-white">Resumo das Verbas</h3>
+                        <button onclick="calcularRescisao()" class="text-sky-400 hover:text-sky-300 flex items-center gap-2 text-sm font-medium transition-colors">
+                            <span>↻</span> Recalcular
+                        </button>
+                    </div>
+
+                    <div id="verbas-container" class="space-y-4"></div>
+
+                    <!-- Card Total Premium -->
+                    <div class="mt-6 gradient-success rounded-2xl p-6 text-white shadow-2xl">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-sm font-semibold opacity-90 uppercase tracking-wider">Valor Total a Receber</p>
+                                <p id="data_pagamento_display" class="text-sm mt-1 opacity-90"></p>
+                            </div>
+                            <div id="total-geral" class="text-5xl font-bold tabular-nums"></div>
+                        </div>
+                    </div>
+
+                    <!-- Botão Exportar PDF -->
+                    <div class="mt-6">
+                        <button onclick="previewPDF()" 
+                                class="w-full py-4 bg-white hover:bg-slate-50 text-slate-900 font-bold rounded-xl flex items-center justify-center gap-3 shadow-lg transition-all border border-slate-200">
+                            <span class="text-2xl">👁️</span>
+                            <span class="text-lg">Visualizar PDF Completo</span>
+                        </button>
+                    </div>
+
+                    <p class="text-center text-slate-500 text-xs mt-6">Cálculo com base em mês comercial de 30 dias • Fuso horário Brasília (UTC-3)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL VISUALIZAÇÃO PDF -->
+    <div id="pdfModal" class="hidden fixed inset-0 modal-overlay z-[100] flex items-center justify-center p-4">
+        <div class="modal-content max-w-4xl w-full max-h-[95vh] overflow-hidden flex flex-col">
+            <div class="flex justify-between items-center border-b border-slate-100 px-8 py-5 bg-slate-50">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">Pré-visualização do Relatório</h3>
+                    <p class="text-sm text-slate-500 mt-1">Revise o documento antes de exportar</p>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="downloadPDF()" 
+                            class="btn-success px-6 py-3 text-white rounded-xl font-semibold flex items-center gap-2 shadow-lg">
+                        <span>⬇️</span> Exportar PDF
+                    </button>
+                    <button onclick="closeModal()" 
+                            class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-semibold transition-colors">
+                        Fechar
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 overflow-auto bg-slate-100 p-8" id="pdfPreviewContainer">
+                <!-- O PDF será renderizado aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Template oculto para geração do PDF -->
+    <div id="pdf-template" style="display: none;">
+        <div id="pdf-content">
+            <div class="pdf-header">
+                <div class="pdf-title">RCT-PJ</div>
+                <div class="pdf-subtitle">Relatório Completo de Rescisão Contratual - Prestador PJ</div>
+            </div>
+
+            <div class="pdf-section">
+                <div class="pdf-section-title">📋 Dados das Partes</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div>
+                        <div class="pdf-field">
+                            <span class="pdf-label">Contratante:</span>
+                            <span class="pdf-value" id="pdf-contratante"></span>
+                        </div>
+                        <div class="pdf-field">
+                            <span class="pdf-label">CNPJ:</span>
+                            <span class="pdf-value" id="pdf-cnpj-contratante"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pdf-field">
+                            <span class="pdf-label">Prestador:</span>
+                            <span class="pdf-value" id="pdf-prestador"></span>
+                        </div>
+                        <div class="pdf-field">
+                            <span class="pdf-label">CNPJ/CPF:</span>
+                            <span class="pdf-value" id="pdf-cnpj-prestador"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pdf-field" style="margin-top: 12px;">
+                    <span class="pdf-label">Período Contratual:</span>
+                    <span class="pdf-value" id="pdf-periodo"></span>
+                </div>
+                <div class="pdf-field">
+                    <span class="pdf-label">Natureza do Serviço:</span>
+                    <span class="pdf-value" id="pdf-natureza"></span>
+                </div>
+                <div class="pdf-field">
+                    <span class="pdf-label">Remuneração Mensal:</span>
+                    <span class="pdf-value" id="pdf-remuneracao"></span>
+                </div>
+            </div>
+
+            <div class="pdf-section">
+                <div class="pdf-section-title">💰 Verbas Rescisórias</div>
+                <div id="pdf-verbas-container"></div>
+            </div>
+
+            <div class="pdf-total">
+                <div class="pdf-total-label">TOTAL A RECEBER</div>
+                <div class="pdf-total-valor" id="pdf-total"></div>
+                <div style="font-size: 14px; margin-top: 8px; opacity: 0.9;">
+                    Pagamento previsto para: <span id="pdf-data-pagamento"></span>
+                </div>
+            </div>
+
+            <div class="pdf-quitacao">
+                <h4>📝 Termo de Quitação Geral</h4>
+                <p>O Prestador declara que concorda integralmente com os valores das verbas rescisórias constantes neste documento e que recebeu o pagamento total de todas as quantias devidas em razão do encerramento da relação contratual de prestação de serviços.</p>
+                <p>Desta forma, o Prestador dá plena, geral, irrevogável e irretratável quitação ao Contratante, nada mais tendo a reclamar, seja na Justiça do Trabalho, Justiça Comum ou fora dela, a qualquer título, em razão do contrato ora rescindido.</p>
+            </div>
+
+            <div class="pdf-assinaturas">
+                <div class="pdf-assinatura">
+                    <div class="pdf-linha-assinatura"></div>
+                    <div class="pdf-assinatura-nome" id="pdf-assinatura-contratante"></div>
+                    <div class="pdf-assinatura-cargo">CONTRATANTE</div>
+                </div>
+                <div class="pdf-assinatura">
+                    <div class="pdf-linha-assinatura"></div>
+                    <div class="pdf-assinatura-nome" id="pdf-assinatura-prestador"></div>
+                    <div class="pdf-assinatura-cargo">PRESTADOR (PJ)</div>
+                </div>
+            </div>
+
+            <div class="pdf-footer">
+                <p>Documento gerado automaticamente pela RCT-PJ em <span id="pdf-data-geracao"></span></p>
+                <p>Cálculo com base em mês comercial de 30 dias • Fuso horário Brasília (UTC-3)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let calculoData = null;
+
+        function formatarMoeda(valor) {
+            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 }).format(valor);
+        }
+
+        function formatarData(data) {
+            return data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+
+        function diasEntre(data1, data2) {
+            const umDia = 1000 * 60 * 60 * 24;
+            return Math.floor((data2.getTime() - data1.getTime()) / umDia) + 1;
+        }
+
+        function calcularFracaoMes(dias) {
+            if (dias <= 14) return 0;
+            return Math.ceil(dias / 30);
+        }
+
+        function verificarDuracaoContrato() {
+            const inicioStr = document.getElementById('data_inicio').value;
+            const terminoStr = document.getElementById('data_termino').value;
+            if (!inicioStr || !terminoStr) return;
+
+            const dataInicio = new Date(inicioStr + 'T00:00:00-03:00');
+            const dataTermino = new Date(terminoStr + 'T23:59:59-03:00');
+            const diasContrato = diasEntre(dataInicio, dataTermino);
+
+            const container = document.getElementById('compensatoria_container');
+            container.classList.toggle('hidden', diasContrato <= 365);
+        }
+
+        function calcularRescisao() {
+            const dataInicioStr = document.getElementById('data_inicio').value;
+            const dataTerminoStr = document.getElementById('data_termino').value;
+            const dataPagamentoStr = document.getElementById('data_pagamento').value;
+
+            if (!dataInicioStr || !dataTerminoStr) {
+                alert("Preencha as datas de início e término.");
+                return;
+            }
+
+            const remuneracao = parseFloat(document.getElementById('remuneracao').value);
+            const remuneracaoAnteriorPaga = document.getElementById('remuneracao_anterior_paga').checked;
+            const avisoConcedido = document.getElementById('aviso_previo_concedido').checked;
+            const compensatoriaPaga = document.getElementById('compensatoria_anual_paga').checked;
+
+            if (!remuneracao || isNaN(remuneracao)) {
+                alert("Informe o valor da remuneração mensal.");
+                return;
+            }
+
+            let dataInicio = new Date(dataInicioStr + 'T00:00:00-03:00');
+            let dataTermino = new Date(dataTerminoStr + 'T23:59:59-03:00');
+            let dataPagamento = dataPagamentoStr ? new Date(dataPagamentoStr + 'T00:00:00-03:00') : dataTermino;
+
+            if (dataTermino < dataInicio) {
+                alert("A data de término deve ser posterior à data de início.");
+                return;
+            }
+
+            const valorDiario = remuneracao / 30;
+
+            // Resíduo Contratual
+            let dataInicioResiduo;
+            if (remuneracaoAnteriorPaga) {
+                const ultimoDiaMesAnterior = new Date(dataTermino.getFullYear(), dataTermino.getMonth(), 0);
+                dataInicioResiduo = new Date(ultimoDiaMesAnterior.getTime() + 86400000);
+            } else {
+                dataInicioResiduo = new Date(dataTermino.getFullYear(), dataTermino.getMonth(), 1);
+            }
+            if (dataInicioResiduo < dataInicio) dataInicioResiduo = dataInicio;
+            const diasResiduo = Math.max(0, diasEntre(dataInicioResiduo, dataTermino));
+            const valorResiduo = diasResiduo * valorDiario;
+
+            // Gratificação Especial
+            const anoTermino = dataTermino.getFullYear();
+            const inicioAno = new Date(anoTermino, 0, 1);
+            const dataInicioGrat = dataInicio > inicioAno ? dataInicio : inicioAno;
+            const diasGrat = diasEntre(dataInicioGrat, dataTermino);
+            const mesesGrat = calcularFracaoMes(diasGrat);
+            const gratificacaoEspecial = (mesesGrat / 12) * remuneracao;
+
+            // Compensação por Serviços Adicionais
+            const dataAquisicao = new Date(dataTermino.getFullYear() - 1, dataTermino.getMonth(), dataTermino.getDate());
+            const dataInicioComp = dataInicio > dataAquisicao ? dataInicio : dataAquisicao;
+            const diasComp = diasEntre(dataInicioComp, dataTermino);
+            const mesesComp = calcularFracaoMes(diasComp);
+            const compensacaoBase = (mesesComp / 12) * remuneracao;
+            const valorCompensacao = compensacaoBase + (compensacaoBase / 3);
+
+            // Verba Compensatória Anual
+            const diasContrato = diasEntre(dataInicio, dataTermino);
+            let valorCompensatoriaAnual = 0;
+            if (diasContrato > 365 && !compensatoriaPaga) {
+                valorCompensatoriaAnual = remuneracao + (remuneracao / 3);
+            }
+
+            // Multa
+            const valorMulta = avisoConcedido ? 0 : remuneracao;
+
+            const total = gratificacaoEspecial + valorCompensacao + valorResiduo + valorCompensatoriaAnual + valorMulta;
+
+            calculoData = {
+                contratante: document.getElementById('contratante').value,
+                cnpjContratante: document.getElementById('cnpj_contratante').value,
+                prestador: document.getElementById('prestador').value,
+                cnpjPrestador: document.getElementById('cnpj_prestador').value,
+                natureza: document.getElementById('natureza').value,
+                remuneracao: remuneracao,
+                dataInicio: formatarData(dataInicio),
+                dataTermino: formatarData(dataTermino),
+                dataPagamento: formatarData(dataPagamento),
+                gratificacaoEspecial: gratificacaoEspecial,
+                valorCompensacao: valorCompensacao,
+                valorResiduo: valorResiduo,
+                diasResiduo: diasResiduo,
+                valorCompensatoriaAnual: valorCompensatoriaAnual,
+                valorMulta: valorMulta,
+                total: total,
+                remuneracaoAnteriorPaga: remuneracaoAnteriorPaga,
+                avisoConcedido: avisoConcedido,
+                compensatoriaPaga: compensatoriaPaga,
+                diasContrato: diasContrato
+            };
+
+            renderDashboard();
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderDashboard() {
+            const d = calculoData;
+            const container = document.getElementById('verbas-container');
+
+            let html = `
+                <div class="result-card animate-slide-up">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="badge badge-success">Gratificação</span>
+                            </div>
+                            <p class="font-bold text-lg text-slate-900">Gratificação Especial</p>
+                            <p class="text-sm text-slate-500">1/12 por fração de mês (superior a 14 dias) no ano corrente.</p>
+                        </div>
+                        <p class="text-3xl font-bold text-emerald-600">${formatarMoeda(d.gratificacaoEspecial)}</p>
+                    </div>
+                </div>
+
+                <div class="result-card animate-slide-up" style="animation-delay: 0.1s">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="badge badge-success">Compensação</span>
+                            </div>
+                            <p class="font-bold text-lg text-slate-900">Compensação por Serviços Adicionais</p>
+                            <p class="text-sm text-slate-500">1/12 por fração de mês (superior a 14 dias) + adicional de 1/3.</p>
+                        </div>
+                        <p class="text-3xl font-bold text-emerald-600">${formatarMoeda(d.valorCompensacao)}</p>
+                    </div>
+                </div>
+
+                <div class="result-card animate-slide-up" style="animation-delay: 0.2s">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="badge badge-success">Resíduo</span>
+                            </div>
+                            <p class="font-bold text-lg text-slate-900">Resíduo Contratual</p>
+                            <p class="text-sm text-slate-500">${d.diasResiduo} dias (mês comercial de 30 dias)</p>
+                        </div>
+                        <p class="text-3xl font-bold text-emerald-600">${formatarMoeda(d.valorResiduo)}</p>
+                    </div>
+                </div>`;
+
+            if (d.valorCompensatoriaAnual > 0) {
+                html += `
+                <div class="result-card animate-slide-up" style="animation-delay: 0.3s; border-color: #fbbf24;">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="badge badge-warning">Compensatória Anual</span>
+                            </div>
+                            <p class="font-bold text-lg text-slate-900">Verba Compensatória Anual</p>
+                            <p class="text-sm text-slate-500">Não foi paga durante o contrato (remuneração mensal + 1/3)</p>
+                        </div>
+                        <p class="text-3xl font-bold text-amber-600">${formatarMoeda(d.valorCompensatoriaAnual)}</p>
+                    </div>
+                </div>`;
+            }
+
+            if (d.valorMulta > 0) {
+                html += `
+                <div class="result-card animate-slide-up" style="animation-delay: 0.4s; border-color: #ef4444;">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="badge badge-danger">Multa</span>
+                            </div>
+                            <p class="font-bold text-lg text-rose-700">Multa Contratual</p>
+                            <p class="text-sm text-rose-600">Falta de aviso prévio de 30 dias</p>
+                        </div>
+                        <p class="text-3xl font-bold text-rose-600">${formatarMoeda(d.valorMulta)}</p>
+                    </div>
+                </div>`;
+            }
+
+            container.innerHTML = html;
+
+            document.getElementById('total-geral').innerHTML = formatarMoeda(d.total);
+            document.getElementById('data_pagamento_display').innerHTML = `Pagamento previsto para <span class="font-semibold">${d.dataPagamento}</span>`;
+        }
+
+        function generatePDFContent() {
+            if (!calculoData) return;
+
+            // Preencher dados no template
+            document.getElementById('pdf-contratante').textContent = calculoData.contratante;
+            document.getElementById('pdf-cnpj-contratante').textContent = calculoData.cnpjContratante;
+            document.getElementById('pdf-prestador').textContent = calculoData.prestador;
+            document.getElementById('pdf-cnpj-prestador').textContent = calculoData.cnpjPrestador;
+            document.getElementById('pdf-periodo').textContent = `${calculoData.dataInicio} a ${calculoData.dataTermino}`;
+            document.getElementById('pdf-natureza').textContent = calculoData.natureza;
+            document.getElementById('pdf-remuneracao').textContent = formatarMoeda(calculoData.remuneracao);
+            document.getElementById('pdf-total').textContent = formatarMoeda(calculoData.total);
+            document.getElementById('pdf-data-pagamento').textContent = calculoData.dataPagamento;
+            document.getElementById('pdf-assinatura-contratante').textContent = calculoData.contratante.toUpperCase();
+            document.getElementById('pdf-assinatura-prestador').textContent = calculoData.prestador.toUpperCase();
+            document.getElementById('pdf-data-geracao').textContent = new Date().toLocaleDateString('pt-BR');
+
+            // Preencher verbas
+            const verbasContainer = document.getElementById('pdf-verbas-container');
+            let verbasHTML = '';
+
+            verbasHTML += `
+                <div class="pdf-verba-card">
+                    <div class="pdf-verba-info">
+                        <h4>Gratificação Especial</h4>
+                        <p>1/12 por fração de mês superior a 14 dias no ano corrente</p>
+                    </div>
+                    <div class="pdf-verba-valor">${formatarMoeda(calculoData.gratificacaoEspecial)}</div>
+                </div>
+            `;
+
+            verbasHTML += `
+                <div class="pdf-verba-card">
+                    <div class="pdf-verba-info">
+                        <h4>Compensação por Serviços Adicionais</h4>
+                        <p>1/12 por fração de mês superior a 14 dias + adicional de 1/3</p>
+                    </div>
+                    <div class="pdf-verba-valor">${formatarMoeda(calculoData.valorCompensacao)}</div>
+                </div>
+            `;
+
+            verbasHTML += `
+                <div class="pdf-verba-card">
+                    <div class="pdf-verba-info">
+                        <h4>Resíduo Contratual</h4>
+                        <p>${calculoData.diasResiduo} dias (mês comercial de 30 dias)</p>
+                    </div>
+                    <div class="pdf-verba-valor">${formatarMoeda(calculoData.valorResiduo)}</div>
+                </div>
+            `;
+
+            if (calculoData.valorCompensatoriaAnual > 0) {
+                verbasHTML += `
+                    <div class="pdf-verba-card destaque">
+                        <div class="pdf-verba-info">
+                            <h4>Verba Compensatória Anual</h4>
+                            <p>Não foi paga durante o contrato (1 remuneração mensal + 1/3)</p>
+                        </div>
+                        <div class="pdf-verba-valor">${formatarMoeda(calculoData.valorCompensatoriaAnual)}</div>
+                    </div>
+                `;
+            }
+
+            if (calculoData.valorMulta > 0) {
+                verbasHTML += `
+                    <div class="pdf-verba-card multa">
+                        <div class="pdf-verba-info">
+                            <h4>Multa Contratual</h4>
+                            <p>Falta de aviso prévio de 30 dias</p>
+                        </div>
+                        <div class="pdf-verba-valor">${formatarMoeda(calculoData.valorMulta)}</div>
+                    </div>
+                `;
+            }
+
+            verbasContainer.innerHTML = verbasHTML;
+
+            return document.getElementById('pdf-content').cloneNode(true);
+        }
+
+        function previewPDF() {
+            if (!calculoData) {
+                alert("Realize o cálculo primeiro.");
+                return;
+            }
+
+            const pdfContent = generatePDFContent();
+            const previewContainer = document.getElementById('pdfPreviewContainer');
+            previewContainer.innerHTML = '';
+            previewContainer.appendChild(pdfContent);
+
+            document.getElementById('pdfModal').classList.remove('hidden');
+            document.getElementById('pdfModal').classList.add('flex');
+        }
+
+        function downloadPDF() {
+            if (!calculoData) return;
+
+            const element = document.getElementById('pdf-content');
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: `RCT-PJ_Rescisao_${calculoData.prestador.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toISOString().slice(0,10)}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait'
+                }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('pdfModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function resetForm() {
+            document.getElementById('rescisaoForm').reset();
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('compensatoria_container').classList.add('hidden');
+            calculoData = null;
+            document.getElementById('data_inicio').value = '2025-01-15';
+            document.getElementById('data_termino').value = '2026-03-30';
+            document.getElementById('data_pagamento').value = '2026-03-30';
+            document.getElementById('remuneracao').value = '8500';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const avisoCheck = document.getElementById('aviso_previo_concedido');
+            const multaInfo = document.getElementById('multa_info');
+            avisoCheck.addEventListener('change', () => multaInfo.classList.toggle('hidden', avisoCheck.checked));
+
+            console.log('%c✅ RCT-PJ Premium carregado com sucesso!', 'color:#0ea5e9; font-weight:600; font-size:14px;');
+            console.log('%c🎨 Visual aprimorado com design moderno e profissional', 'color:#10b981; font-weight:500;');
+            console.log('%c📄 PDF com pré-visualização obrigatória e fontes ampliadas', 'color:#f59e0b; font-weight:500;');
+        });
+    </script>
+</body>
+</html>
