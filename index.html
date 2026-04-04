@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>RCT-PJ • Rescisão Contratual PJ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -17,10 +17,10 @@
         .gradient-primary { background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%); }
         .gradient-success { background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%); }
         .glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-        .input-premium { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); border: 2px solid #e2e8f0; font-size: 1.125rem; }
+        .input-premium { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); border: 2px solid #e2e8f0; font-size: 1rem; }
         .input-premium:focus { border-color: #8b5cf6; box-shadow: 0 0 0 4px rgba(139,92,246,0.15); transform: translateY(-2px); }
-        .input-moeda { font-size: 1.5rem !important; font-weight: 700; color: #1e293b; letter-spacing: 0.5px; }
-        .moeda-simbolo { font-size: 1.75rem; font-weight: 800; color: #8b5cf6; margin-right: 12px; }
+        .input-moeda { font-size: 1.25rem !important; font-weight: 700; color: #1e293b; letter-spacing: 0.5px; }
+        .moeda-simbolo { font-size: 1.5rem; font-weight: 800; color: #8b5cf6; margin-right: 8px; }
         .card-premium { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: 2px solid transparent; }
         .card-premium:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(139,92,246,0.25); border-color: #8b5cf6; }
         .section-colorida { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-left: 5px solid #f59e0b; }
@@ -30,19 +30,19 @@
         .section-datas { background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); border-left: 5px solid #6366f1; }
         .animate-slide-up { animation: slideUp 0.6s ease forwards; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .btn-primary { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%); transition: all 0.3s ease; position: relative; overflow: hidden; font-size: 1.25rem; font-weight: 700; }
+        .btn-primary { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%); transition: all 0.3s ease; position: relative; overflow: hidden; font-size: 1.125rem; font-weight: 700; }
         .btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
         .btn-primary:hover::before { left: 100%; }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -10px rgba(139,92,246,0.5); }
-        .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); transition: all 0.3s ease; font-size: 1.125rem; font-weight: 700; }
-        .btn-secondary { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); transition: all 0.3s ease; font-size: 1.125rem; font-weight: 700; }
-        .checkbox-premium { appearance: none; width: 28px; height: 28px; border: 3px solid #cbd5e1; border-radius: 8px; cursor: pointer; position: relative; transition: all 0.2s; }
+        .btn-success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); transition: all 0.3s ease; font-size: 1rem; font-weight: 700; }
+        .btn-secondary { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); transition: all 0.3s ease; font-size: 1rem; font-weight: 700; }
+        .checkbox-premium { appearance: none; width: 24px; height: 24px; border: 3px solid #cbd5e1; border-radius: 8px; cursor: pointer; position: relative; transition: all 0.2s; flex-shrink: 0; }
         .checkbox-premium:checked { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); border-color: #8b5cf6; }
-        .checkbox-premium:checked::after { content: '✓'; position: absolute; color: white; font-size: 18px; font-weight: bold; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        .label-grande { font-size: 1.125rem; font-weight: 700; color: #374151; margin-bottom: 0.75rem; display: block; }
-        .result-card { background: white; border-radius: 20px; padding: 28px; border: 2px solid #e5e7eb; transition: all 0.3s ease; font-size: 1.125rem; }
+        .checkbox-premium:checked::after { content: '✓'; position: absolute; color: white; font-size: 16px; font-weight: bold; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .label-grande { font-size: 1rem; font-weight: 700; color: #374151; margin-bottom: 0.5rem; display: block; }
+        .result-card { background: white; border-radius: 20px; padding: 20px; border: 2px solid #e5e7eb; transition: all 0.3s ease; font-size: 1rem; }
         .result-card:hover { border-color: #8b5cf6; box-shadow: 0 15px 35px -10px rgba(139,92,246,0.2); }
-        .badge { display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 9999px; font-size: 0.875rem; font-weight: 700; }
+        .badge { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; }
         .badge-success { background: #d1fae5; color: #065f46; }
         .badge-warning { background: #fef3c7; color: #92400e; }
         .badge-danger { background: #fee2e2; color: #991b1b; }
@@ -81,78 +81,173 @@
         .pdf-assinatura-cargo { font-size: 10px; color: #6b7280; font-weight: 600; text-transform: uppercase; }
         .pdf-footer { position: absolute; bottom: 10mm; left: 15mm; right: 15mm; text-align: center; font-size: 10px; color: #9ca3af; border-top: 1px solid #e5e7eb; padding-top: 10px; }
         .pdf-page-number { position: absolute; bottom: 10mm; right: 15mm; font-size: 10px; color: #9ca3af; }
-        .modal-lar-overlay { background: rgba(15,23,42,0.85); backdrop-filter: blur(12px); }
-        .lar-result-card { background: white; border-radius: 15px; padding: 20px; border-left: 5px solid #ec4899; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        .lar-result-label { font-size: 0.875rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .lar-result-value { font-size: 1.5rem; font-weight: 800; color: #ec4899; }
         .tipo-calculo-option { opacity: 0.5; pointer-events: none; transition: all 0.3s ease; }
         .tipo-calculo-option.active { opacity: 1; pointer-events: auto; }
+        
+        /* Toast notification com botão fechar */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            backdrop-filter: blur(8px);
+            background: rgba(15,23,42,0.95);
+            border-left: 5px solid #10b981;
+            max-width: 90vw;
+            white-space: nowrap;
+        }
+        @media (max-width: 640px) {
+            .toast-notification { white-space: normal; text-align: center; border-radius: 20px; padding: 10px 16px; font-size: 0.85rem; gap: 8px; max-width: 85vw; flex-wrap: wrap; justify-content: center; }
+            .toast-notification span:first-child { font-size: 1.2rem; }
+            .toast-close { margin-left: 5px; padding: 4px 8px; }
+        }
+        .toast-notification.show { transform: translateX(-50%) translateY(0); }
+        .toast-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 30px;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            margin-left: 4px;
+        }
+        .toast-close:hover { background: rgba(255,255,255,0.4); }
+        
+        /* Responsividade extra */
+        @media (max-width: 768px) {
+            .glass { padding: 1.25rem; }
+            .section-contratante, .section-prestador, .section-valores, .section-datas, .section-colorida { padding: 1rem; }
+            .result-card { padding: 1rem; }
+            .label-grande { font-size: 0.9rem; }
+            .btn-primary, .btn-success, .btn-secondary { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        }
     </style>
 </head>
 <body class="gradient-bg min-h-screen text-slate-800">
     <nav class="glass sticky top-0 z-50 border-b border-white/30">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div class="w-14 h-14 gradient-primary rounded-2xl flex items-center justify-center text-white text-3xl shadow-xl">📋</div>
-                    <div><h1 class="text-3xl font-bold text-slate-900 tracking-tight">RCT-PJ</h1><p class="text-sm text-slate-600 font-semibold tracking-wider uppercase">Rescisão Contratual • Prestador PJ</p></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 gradient-primary rounded-xl sm:rounded-2xl flex items-center justify-center text-white text-2xl sm:text-3xl shadow-xl">📋</div>
+                    <div><h1 class="text-xl sm:text-3xl font-bold text-slate-900 tracking-tight">RCT-PJ</h1><p class="text-xs sm:text-sm text-slate-600 font-semibold tracking-wider uppercase">Rescisão Contratual • Prestador PJ</p></div>
                 </div>
-                <div class="flex gap-3">
-                    <button onclick="openLARModal()" class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white rounded-xl font-bold transition-all text-base shadow-lg border border-pink-600"><span class="text-xl">🏖️</span><span>Licença Anual</span></button>
-                    <button onclick="resetForm()" class="flex items-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 text-slate-700 rounded-xl font-bold transition-all text-base shadow-lg border border-slate-200"><span class="text-xl">⟳</span><span>Nova Rescisão</span></button>
+                <div class="flex gap-2 sm:gap-3">
+                    <button onclick="openLARModal()" class="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white rounded-xl font-bold transition-all text-sm sm:text-base shadow-lg border border-pink-600"><span class="text-lg sm:text-xl">🏖️</span><span class="hidden xs:inline">Licença Anual</span></button>
+                    <button onclick="resetForm()" class="flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-white hover:bg-slate-50 text-slate-700 rounded-xl font-bold transition-all text-sm sm:text-base shadow-lg border border-slate-200"><span class="text-lg sm:text-xl">⟳</span><span class="hidden xs:inline">Nova Rescisão</span></button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-6 py-10">
-        <div class="text-center mb-12 animate-slide-up"><h2 class="text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">Cálculo de Rescisão Contratual</h2><p class="text-white/90 text-xl font-medium">Gratificação Especial • Compensação por Serviços Adicionais • Resíduo Contratual</p></div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+        <div class="text-center mb-8 sm:mb-12 animate-slide-up"><h2 class="text-3xl sm:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight drop-shadow-lg">Cálculo de Rescisão Contratual</h2><p class="text-white/90 text-base sm:text-xl font-medium">Gratificação Especial • Compensação por Serviços Adicionais • Resíduo Contratual</p></div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             <div class="lg:col-span-7">
-                <div class="glass rounded-3xl shadow-2xl p-8 card-premium">
-                    <div class="mb-8 text-center"><h3 class="text-3xl font-bold text-slate-900 flex items-center justify-center gap-3"><span class="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-2xl">📝</span>Informações da Rescisão</h3><p class="text-slate-600 text-lg mt-3 font-medium">Preencha os dados abaixo para calcular as verbas rescisórias</p></div>
+                <div class="glass rounded-3xl shadow-2xl p-5 sm:p-8 card-premium">
+                    <div class="mb-6 sm:mb-8 text-center"><h3 class="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center justify-center gap-2 sm:gap-3"><span class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl sm:text-2xl">📝</span>Informações da Rescisão</h3><p class="text-slate-600 text-base sm:text-lg mt-2 font-medium">Preencha os dados abaixo para calcular as verbas rescisórias</p></div>
                     <form id="rescisaoForm" onsubmit="event.preventDefault(); calcularRescisao();">
-                        <div class="space-y-6">
-                            <div class="section-contratante rounded-2xl p-6"><h4 class="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2"><span>🏢</span> Dados do Contratante</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-5"><div><label class="label-grande text-blue-900">Razão Social</label><input type="text" id="contratante" value="Labmedic Comércio e Manutenção de Equipamentos Médicos LTDA" class="input-premium w-full rounded-xl px-4 py-4 bg-white/80" required></div><div><label class="label-grande text-blue-900">CNPJ</label><input type="text" id="cnpj_contratante" value="21.947.632/0001-37" class="input-premium w-full rounded-xl px-4 py-4 bg-white/80" required></div></div></div>
-                            <div class="section-prestador rounded-2xl p-6"><h4 class="text-xl font-bold text-pink-800 mb-4 flex items-center gap-2"><span>👤</span> Dados do Prestador</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-5"><div><label class="label-grande text-pink-900">Nome / Razão Social</label><input type="text" id="prestador" value="Nome do Prestador de Serviços - MEI" class="input-premium w-full rounded-xl px-4 py-4 bg-white/80" required></div><div><label class="label-grande text-pink-900">CNPJ / CPF</label><input type="text" id="cnpj_prestador" value="Informe aqui o CNPJ" class="input-premium w-full rounded-xl px-4 py-4 bg-white/80" required></div></div></div>
-                            <div class="section-valores rounded-2xl p-6"><h4 class="text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2"><span>💰</span> Valores e Serviço</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-5"><div><label class="label-grande text-emerald-900">Remuneração Mensal (R$)</label><div class="relative flex items-center bg-white/80 rounded-xl px-4 py-2 input-premium"><span class="moeda-simbolo">R$</span><input type="text" id="remuneracao_display" value="3.500,00" class="input-moeda w-full bg-transparent border-none outline-none" oninput="formatarMoedaInput(this)" required><input type="hidden" id="remuneracao" value="3500"></div><p class="text-sm text-emerald-700 mt-2 font-medium">💡 Mês comercial: 30 dias</p></div><div><label class="label-grande text-emerald-900">Natureza do Serviço</label><input type="text" id="natureza" value="Manutenção de Equipamentos Médico-hospitalares" class="input-premium w-full rounded-xl px-4 py-4 bg-white/80" required></div></div></div>
-                            <div class="section-datas rounded-2xl p-6"><h4 class="text-xl font-bold text-indigo-800 mb-4 flex items-center gap-2"><span>📅</span> Período e Pagamento</h4><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div><label class="label-grande text-indigo-900">Data de Início</label><input type="date" id="data_inicio" value="2025-01-15" class="input-premium w-full rounded-xl px-4 py-4 bg-white/80" required onchange="verificarDuracaoContrato()"></div><div><label class="label-grande text-indigo-900">Data de Término</label><input type="date" id="data_termino" value="2026-03-30" class="input-premium w-full rounded-xl px-4 py-4 bg-white/80" required onchange="verificarDuracaoContrato()"></div><div><label class="label-grande text-indigo-900">Data de Pagamento</label><input type="date" id="data_pagamento" value="2026-03-30" class="input-premium w-full rounded-xl px-4 py-4 bg-white/80" required></div></div></div>
-                            <div class="section-colorida rounded-2xl p-6"><h4 class="text-xl font-bold text-amber-800 mb-4 flex items-center gap-2"><span>⚙️</span> Opções de Cálculo</h4><div class="space-y-4"><label class="flex items-start gap-4 cursor-pointer group"><input type="checkbox" id="remuneracao_anterior_paga" class="checkbox-premium mt-1"><div><span class="font-bold text-amber-900 block text-lg mb-1">Remuneração da competência anterior já foi paga integralmente</span><p class="text-base text-amber-800">O Resíduo Contratual considerará apenas os dias excedentes ao mês anterior.</p></div></label><label class="flex items-start gap-4 cursor-pointer group pt-4 border-t border-amber-300"><input type="checkbox" id="aviso_previo_concedido" checked class="checkbox-premium mt-1"><div><span class="font-bold text-amber-900 block text-lg mb-1">O prestador concedeu aviso prévio de 30 dias</span><div id="multa_info" class="hidden mt-2"><span class="badge badge-danger text-base"><span class="mr-2">⚠️</span> Multa contratual de uma remuneração mensal integral será aplicada</span></div></div></label><div id="compensatoria_container" class="hidden pt-4 border-t border-amber-300"><label class="flex items-start gap-4 cursor-pointer group"><input type="checkbox" id="compensatoria_anual_paga" checked class="checkbox-premium mt-1"><div><span class="font-bold text-amber-900 block text-lg mb-1">Houve pagamento da Verba Compensatória Anual?</span><p class="text-base text-amber-800">Se marcado como "Não", será adicionada uma remuneração mensal + 1/3 às verbas rescisórias.</p></div></label></div></div></div>
-                            <div class="pt-4"><button type="submit" class="btn-primary w-full py-5 text-white rounded-2xl shadow-2xl">🚀 PROCESSAR CÁLCULO</button></div>
+                        <div class="space-y-5 sm:space-y-6">
+                            <div class="section-contratante rounded-2xl p-4 sm:p-6"><h4 class="text-lg sm:text-xl font-bold text-blue-800 mb-3 sm:mb-4 flex items-center gap-2"><span>🏢</span> Dados do Contratante</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"><div><label class="label-grande text-blue-900">Razão Social</label><input type="text" id="contratante" value="Labmedic Comércio e Manutenção de Equipamentos Médicos LTDA" class="input-premium w-full rounded-xl px-4 py-3 sm:py-4 bg-white/80" required></div><div><label class="label-grande text-blue-900">CNPJ</label><input type="text" id="cnpj_contratante" value="21.947.632/0001-37" class="input-premium w-full rounded-xl px-4 py-3 sm:py-4 bg-white/80" required></div></div></div>
+                            <div class="section-prestador rounded-2xl p-4 sm:p-6"><h4 class="text-lg sm:text-xl font-bold text-pink-800 mb-3 sm:mb-4 flex items-center gap-2"><span>👤</span> Dados do Prestador</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"><div><label class="label-grande text-pink-900">Nome / Razão Social</label><input type="text" id="prestador" value="Nome do Prestador de Serviços - MEI" class="input-premium w-full rounded-xl px-4 py-3 sm:py-4 bg-white/80" required onfocus="limparCampoPadrao(this, 'Nome do Prestador de Serviços - MEI')"></div><div><label class="label-grande text-pink-900">CNPJ / CPF</label><input type="text" id="cnpj_prestador" value="Informe aqui o CNPJ" class="input-premium w-full rounded-xl px-4 py-3 sm:py-4 bg-white/80" required onfocus="limparCampoPadrao(this, 'Informe aqui o CNPJ')"></div></div></div>
+                            <div class="section-valores rounded-2xl p-4 sm:p-6"><h4 class="text-lg sm:text-xl font-bold text-emerald-800 mb-3 sm:mb-4 flex items-center gap-2"><span>💰</span> Valores e Serviço</h4><div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"><div><label class="label-grande text-emerald-900">Remuneração Mensal (R$)</label><div class="relative flex items-center bg-white/80 rounded-xl px-3 py-2 input-premium"><span class="moeda-simbolo">R$</span><input type="text" id="remuneracao_display" value="3.500,00" class="input-moeda w-full bg-transparent border-none outline-none" oninput="formatarMoedaInput(this)" required><input type="hidden" id="remuneracao" value="3500"></div><p class="text-xs sm:text-sm text-emerald-700 mt-2 font-medium">💡 Mês comercial: 30 dias</p></div><div><label class="label-grande text-emerald-900">Natureza do Serviço</label><input type="text" id="natureza" value="Manutenção de Equipamentos Médico-hospitalares" class="input-premium w-full rounded-xl px-4 py-3 sm:py-4 bg-white/80" required></div></div></div>
+                            <div class="section-datas rounded-2xl p-4 sm:p-6"><h4 class="text-lg sm:text-xl font-bold text-indigo-800 mb-3 sm:mb-4 flex items-center gap-2"><span>📅</span> Período e Pagamento</h4><div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"><div><label class="label-grande text-indigo-900">Data de Início</label><input type="date" id="data_inicio" value="2025-01-15" class="input-premium w-full rounded-xl px-4 py-3 sm:py-4 bg-white/80" required onchange="verificarDuracaoContrato()"></div><div><label class="label-grande text-indigo-900">Data de Término</label><input type="date" id="data_termino" value="2026-03-30" class="input-premium w-full rounded-xl px-4 py-3 sm:py-4 bg-white/80" required onchange="verificarDuracaoContrato()"></div><div><label class="label-grande text-indigo-900">Data de Pagamento</label><input type="date" id="data_pagamento" value="2026-03-30" class="input-premium w-full rounded-xl px-4 py-3 sm:py-4 bg-white/80" required></div></div></div>
+                            <div class="section-colorida rounded-2xl p-4 sm:p-6"><h4 class="text-lg sm:text-xl font-bold text-amber-800 mb-3 sm:mb-4 flex items-center gap-2"><span>⚙️</span> Opções de Cálculo</h4><div class="space-y-4"><label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" id="remuneracao_anterior_paga" class="checkbox-premium mt-1"><div><span class="font-bold text-amber-900 block text-base sm:text-lg mb-1">Remuneração da competência anterior já foi paga integralmente</span><p class="text-sm text-amber-800">O Resíduo Contratual considerará apenas os dias excedentes ao mês anterior.</p></div></label><label class="flex items-start gap-3 cursor-pointer group pt-4 border-t border-amber-300"><input type="checkbox" id="aviso_previo_concedido" checked class="checkbox-premium mt-1"><div><span class="font-bold text-amber-900 block text-base sm:text-lg mb-1">O prestador concedeu aviso prévio de 30 dias</span><div id="multa_info" class="hidden mt-2"><span class="badge badge-danger text-sm"><span class="mr-2">⚠️</span> Multa contratual de uma remuneração mensal integral será aplicada</span></div></div></label><div id="compensatoria_container" class="hidden pt-4 border-t border-amber-300"><label class="flex items-start gap-3 cursor-pointer group"><input type="checkbox" id="compensatoria_anual_paga" checked class="checkbox-premium mt-1"><div><span class="font-bold text-amber-900 block text-base sm:text-lg mb-1">Houve pagamento da Verba Compensatória Anual?</span><p class="text-sm text-amber-800">Se marcado como "Não", será adicionada uma remuneração mensal + 1/3 às verbas rescisórias.</p></div></label></div></div></div>
+                            <div class="pt-2"><button type="submit" class="btn-primary w-full py-4 sm:py-5 text-white rounded-2xl shadow-2xl">🚀 PROCESSAR CÁLCULO</button></div>
                         </div>
                     </form>
                 </div>
             </div>
-            <div id="dashboard" class="lg:col-span-5 hidden"><div class="sticky top-28"><div class="flex items-center justify-between mb-6"><h3 class="text-3xl font-bold text-white drop-shadow-md">Resumo das Verbas</h3><button onclick="calcularRescisao()" class="text-white/90 hover:text-white flex items-center gap-2 text-base font-bold transition-colors bg-white/20 px-4 py-2 rounded-xl backdrop-blur"><span class="text-xl">↻</span> Recalcular</button></div><div id="verbas-container" class="space-y-4"></div><div class="mt-6 gradient-success rounded-3xl p-8 text-white shadow-2xl border-4 border-white/30"><div class="flex justify-between items-end"><div><p class="text-base font-bold opacity-95 uppercase tracking-wider">Valor Total a Receber</p><p id="data_pagamento_display" class="text-base mt-2 opacity-95 font-medium"></p></div><div id="total-geral" class="text-5xl font-bold tabular-nums drop-shadow-lg"></div></div></div><div class="mt-6"><button onclick="previewPDF()" class="w-full py-5 bg-white hover:bg-slate-50 text-slate-900 font-bold rounded-2xl flex items-center justify-center gap-3 shadow-2xl transition-all border-2 border-slate-200 text-xl"><span class="text-3xl">👁️</span><span>Visualizar PDF Completo</span></button></div><p class="text-center text-white/80 text-sm mt-6 font-medium">📅 Cálculo com base em mês comercial de 30 dias • Fuso horário Brasília (UTC-3)</p></div></div>
+            <div id="dashboard" class="lg:col-span-5 hidden"><div class="sticky top-24 sm:top-28"><div class="flex items-center justify-between mb-4 sm:mb-6"><h3 class="text-2xl sm:text-3xl font-bold text-white drop-shadow-md">Resumo das Verbas</h3><button onclick="calcularRescisao()" class="text-white/90 hover:text-white flex items-center gap-2 text-sm sm:text-base font-bold transition-colors bg-white/20 px-3 py-2 rounded-xl backdrop-blur"><span class="text-xl">↻</span> Recalcular</button></div><div id="verbas-container" class="space-y-3 sm:space-y-4"></div><div class="mt-5 sm:mt-6 gradient-success rounded-3xl p-5 sm:p-8 text-white shadow-2xl border-4 border-white/30"><div class="flex flex-wrap justify-between items-end gap-3"><div><p class="text-sm sm:text-base font-bold opacity-95 uppercase tracking-wider">Valor Total a Receber</p><p id="data_pagamento_display" class="text-xs sm:text-base mt-2 opacity-95 font-medium"></p></div><div id="total-geral" class="text-3xl sm:text-5xl font-bold tabular-nums drop-shadow-lg"></div></div></div><div class="mt-5 sm:mt-6"><button onclick="previewPDF()" class="w-full py-4 sm:py-5 bg-white hover:bg-slate-50 text-slate-900 font-bold rounded-2xl flex items-center justify-center gap-2 sm:gap-3 shadow-2xl transition-all border-2 border-slate-200 text-lg sm:text-xl"><span class="text-2xl sm:text-3xl">👁️</span><span>Visualizar PDF Completo</span></button></div><p class="text-center text-white/80 text-xs sm:text-sm mt-5 sm:mt-6 font-medium">📅 Cálculo com base em mês comercial de 30 dias • Fuso horário Brasília (UTC-3)</p></div></div>
         </div>
     </div>
 
-    <div id="larModal" class="hidden fixed inset-0 modal-lar-overlay z-[100] flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[95vh] overflow-hidden flex flex-col shadow-2xl">
-            <div class="flex justify-between items-center border-b border-slate-200 px-8 py-6 bg-gradient-to-r from-pink-50 to-rose-50"><div><h3 class="text-2xl font-bold text-slate-900">🏖️ Licença Anual Remunerada</h3><p class="text-base text-slate-600 mt-1">Cálculo para prestadores de serviço técnico PJ (MEI)</p></div><button onclick="closeLARModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold transition-colors text-lg">✕</button></div>
-            <div class="flex-1 overflow-auto p-8">
-                <form id="larForm" onsubmit="event.preventDefault(); calcularLAR();" class="space-y-6">
-                    <div><label class="label-grande text-pink-900">Remuneração Mensal Contratual (R$)</label><div class="relative flex items-center bg-white rounded-xl px-4 py-2 border-2 border-pink-200 focus-within:border-pink-500"><span class="moeda-simbolo">R$</span><input type="text" id="lar_remuneracao_display" value="3.500,00" class="input-moeda w-full bg-transparent border-none outline-none" oninput="formatarMoedaInput(this, 'lar_remuneracao')" required><input type="hidden" id="lar_remuneracao" value="3500"></div><p class="text-sm text-pink-700 mt-2 font-medium">💡 Base para cálculo: 30 dias comerciais</p></div>
-                    <div><label class="label-grande text-pink-900">Data Inicial do Afastamento</label><input type="date" id="lar_data_inicio" value="2026-04-01" class="input-premium w-full rounded-xl px-4 py-4 bg-white border-2 border-pink-200 focus:border-pink-500" required onchange="calcularDataFim()"><p class="text-sm text-pink-700 mt-2 font-medium">📅 Primeiro dia de afastamento</p></div>
-                    <div><label class="label-grande text-pink-900">Dias de Afastamento</label><input type="number" id="lar_dias_afastamento" value="15" min="1" max="365" class="input-premium w-full rounded-xl px-4 py-4 bg-white border-2 border-pink-200 focus:border-pink-500" required onchange="calcularDataFim(); atualizarTipoCalculo()"><p class="text-sm text-pink-700 mt-2 font-medium">📊 Número de dias do afastamento</p></div>
-                    <div><label class="label-grande text-pink-900">Data Final do Afastamento (Calculada)</label><input type="date" id="lar_data_fim" value="2026-04-15" class="input-premium w-full rounded-xl px-4 py-4 bg-slate-100 border-2 border-pink-200" disabled><p class="text-sm text-pink-700 mt-2 font-medium">📅 Calculada automaticamente</p></div>
-                    <div><label class="label-grande text-pink-900">Tipo de Cálculo</label><div class="space-y-3"><label class="flex items-center gap-3 cursor-pointer p-4 border-2 border-pink-200 rounded-xl hover:bg-pink-50 transition-colors tipo-calculo-option active" id="opcao-proporcional"><input type="radio" name="lar_tipo" value="proporcional" checked class="w-5 h-5 accent-pink-500"><div><span class="font-bold text-pink-900 block">Proporcional</span><p class="text-sm text-pink-700">Calcula apenas os dias do afastamento</p></div></label><label class="flex items-center gap-3 cursor-pointer p-4 border-2 border-pink-200 rounded-xl hover:bg-pink-50 transition-colors tipo-calculo-option" id="opcao-integral"><input type="radio" name="lar_tipo" value="integral" class="w-5 h-5 accent-pink-500"><div><span class="font-bold text-pink-900 block">Integral (30 dias)</span><p class="text-sm text-pink-700">Paga uma remuneração mensal completa + 1/3</p></div></label></div></div>
-                    <div class="flex gap-4 pt-4"><button type="submit" class="btn-secondary flex-1 py-4 text-white rounded-2xl shadow-lg">🧮 Calcular Licença</button><button type="button" onclick="closeLARModal()" class="flex-1 py-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-2xl font-bold transition-colors">Cancelar</button></div>
+    <!-- Toast de sucesso com botão fechar -->
+    <div id="successToast" class="toast-notification">
+        <span>✅</span> 
+        <span id="toastMessage">Cálculo realizado com sucesso!</span> 
+        <span>👇</span>
+        <button class="toast-close" onclick="fecharToast()">✕</button>
+    </div>
+
+    <!-- Modais (LAR, PDF) mantidos -->
+    <div id="larModal" class="hidden fixed inset-0 modal-lar-overlay z-[100] flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[95vh] overflow-hidden flex flex-col shadow-2xl mx-2 sm:mx-0">
+            <div class="flex justify-between items-center border-b border-slate-200 px-5 sm:px-8 py-4 sm:py-6 bg-gradient-to-r from-pink-50 to-rose-50"><div><h3 class="text-xl sm:text-2xl font-bold text-slate-900">🏖️ Licença Anual Remunerada</h3><p class="text-sm sm:text-base text-slate-600 mt-1">Cálculo para prestadores de serviço técnico PJ (MEI)</p></div><button onclick="closeLARModal()" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold transition-colors text-base">✕</button></div>
+            <div class="flex-1 overflow-auto p-5 sm:p-8">
+                <form id="larForm" onsubmit="event.preventDefault(); calcularLAR();" class="space-y-5 sm:space-y-6">
+                    <div><label class="label-grande text-pink-900">Remuneração Mensal Contratual (R$)</label><div class="relative flex items-center bg-white rounded-xl px-3 py-2 border-2 border-pink-200 focus-within:border-pink-500"><span class="moeda-simbolo">R$</span><input type="text" id="lar_remuneracao_display" value="3.500,00" class="input-moeda w-full bg-transparent border-none outline-none" oninput="formatarMoedaInput(this, 'lar_remuneracao')" required><input type="hidden" id="lar_remuneracao" value="3500"></div><p class="text-xs sm:text-sm text-pink-700 mt-2 font-medium">💡 Base para cálculo: 30 dias comerciais</p></div>
+                    <div><label class="label-grande text-pink-900">Data Inicial do Afastamento</label><input type="date" id="lar_data_inicio" value="2026-04-01" class="input-premium w-full rounded-xl px-4 py-3 bg-white border-2 border-pink-200 focus:border-pink-500" required onchange="calcularDataFim()"><p class="text-xs sm:text-sm text-pink-700 mt-2 font-medium">📅 Primeiro dia de afastamento</p></div>
+                    <div><label class="label-grande text-pink-900">Dias de Afastamento</label><input type="number" id="lar_dias_afastamento" value="15" min="1" max="365" class="input-premium w-full rounded-xl px-4 py-3 bg-white border-2 border-pink-200 focus:border-pink-500" required onchange="calcularDataFim(); atualizarTipoCalculo()"><p class="text-xs sm:text-sm text-pink-700 mt-2 font-medium">📊 Número de dias do afastamento</p></div>
+                    <div><label class="label-grande text-pink-900">Data Final do Afastamento (Calculada)</label><input type="date" id="lar_data_fim" value="2026-04-15" class="input-premium w-full rounded-xl px-4 py-3 bg-slate-100 border-2 border-pink-200" disabled><p class="text-xs sm:text-sm text-pink-700 mt-2 font-medium">📅 Calculada automaticamente</p></div>
+                    <div><label class="label-grande text-pink-900">Tipo de Cálculo</label><div class="space-y-3"><label class="flex items-center gap-3 cursor-pointer p-3 border-2 border-pink-200 rounded-xl hover:bg-pink-50 transition-colors tipo-calculo-option active" id="opcao-proporcional"><input type="radio" name="lar_tipo" value="proporcional" checked class="w-5 h-5 accent-pink-500"><div><span class="font-bold text-pink-900 block">Proporcional</span><p class="text-xs sm:text-sm text-pink-700">Calcula apenas os dias do afastamento</p></div></label><label class="flex items-center gap-3 cursor-pointer p-3 border-2 border-pink-200 rounded-xl hover:bg-pink-50 transition-colors tipo-calculo-option" id="opcao-integral"><input type="radio" name="lar_tipo" value="integral" class="w-5 h-5 accent-pink-500"><div><span class="font-bold text-pink-900 block">Integral (30 dias)</span><p class="text-xs sm:text-sm text-pink-700">Paga uma remuneração mensal completa + 1/3</p></div></label></div></div>
+                    <div class="flex gap-3 pt-4"><button type="submit" class="btn-secondary flex-1 py-3 text-white rounded-2xl shadow-lg">🧮 Calcular Licença</button><button type="button" onclick="closeLARModal()" class="flex-1 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-2xl font-bold transition-colors">Cancelar</button></div>
                 </form>
-                <div id="larResultado" class="hidden mt-8 pt-8 border-t-2 border-slate-200"><h4 class="text-xl font-bold text-slate-900 mb-6">📊 Resultado do Cálculo</h4><div id="larResultadoContainer" class="space-y-4"></div><button onclick="previewLARPDF()" class="btn-success w-full py-4 text-white rounded-2xl shadow-lg mt-6">👁️ Visualizar Recibo em PDF</button></div>
+                <div id="larResultado" class="hidden mt-6 sm:mt-8 pt-6 sm:pt-8 border-t-2 border-slate-200"><h4 class="text-lg sm:text-xl font-bold text-slate-900 mb-5 sm:mb-6">📊 Resultado do Cálculo</h4><div id="larResultadoContainer" class="space-y-3 sm:space-y-4"></div><button onclick="previewLARPDF()" class="btn-success w-full py-3 sm:py-4 text-white rounded-2xl shadow-lg mt-5 sm:mt-6">👁️ Visualizar Recibo em PDF</button></div>
             </div>
         </div>
     </div>
 
-    <div id="pdfModal" class="hidden fixed inset-0 modal-overlay z-[100] flex items-center justify-center p-4"><div class="bg-white rounded-3xl max-w-5xl w-full max-h-[95vh] overflow-hidden flex flex-col shadow-2xl"><div class="flex justify-between items-center border-b border-slate-200 px-8 py-6 bg-gradient-to-r from-slate-50 to-white"><div><h3 class="text-2xl font-bold text-slate-900">📄 Pré-visualização do Relatório</h3><p class="text-base text-slate-600 mt-1">Revise o documento antes de exportar</p></div><div class="flex gap-4"><button onclick="downloadPDF()" class="btn-success px-8 py-4 text-white rounded-2xl font-bold flex items-center gap-3 shadow-xl"><span class="text-2xl">⬇️</span> Exportar PDF</button><button onclick="closeModal()" class="px-8 py-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-2xl font-bold transition-colors text-lg">✕ Fechar</button></div></div><div class="flex-1 overflow-auto bg-slate-100 p-8" id="pdfPreviewContainer"></div></div></div>
-    <div id="larPdfModal" class="hidden fixed inset-0 modal-overlay z-[100] flex items-center justify-center p-4"><div class="bg-white rounded-3xl max-w-5xl w-full max-h-[95vh] overflow-hidden flex flex-col shadow-2xl"><div class="flex justify-between items-center border-b border-slate-200 px-8 py-6 bg-gradient-to-r from-pink-50 to-rose-50"><div><h3 class="text-2xl font-bold text-slate-900">🏖️ Pré-visualização do Recibo</h3><p class="text-base text-slate-600 mt-1">Licença Anual Remunerada</p></div><div class="flex gap-4"><button onclick="downloadLARPDF()" class="btn-success px-8 py-4 text-white rounded-2xl font-bold flex items-center gap-3 shadow-xl"><span class="text-2xl">⬇️</span> Exportar PDF</button><button onclick="closeLARPdfModal()" class="px-8 py-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-2xl font-bold transition-colors text-lg">✕ Fechar</button></div></div><div class="flex-1 overflow-auto bg-slate-100 p-8" id="larPdfPreviewContainer"></div></div></div>
+    <div id="pdfModal" class="hidden fixed inset-0 modal-overlay z-[100] flex items-center justify-center p-3 sm:p-4"><div class="bg-white rounded-3xl max-w-5xl w-full max-h-[95vh] overflow-hidden flex flex-col shadow-2xl mx-2 sm:mx-0"><div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-200 px-5 sm:px-8 py-4 sm:py-6 bg-gradient-to-r from-slate-50 to-white"><div><h3 class="text-xl sm:text-2xl font-bold text-slate-900">📄 Pré-visualização do Relatório</h3><p class="text-sm sm:text-base text-slate-600 mt-1">Revise o documento antes de exportar</p></div><div class="flex gap-3"><button onclick="downloadPDF()" class="btn-success px-5 sm:px-8 py-3 sm:py-4 text-white rounded-2xl font-bold flex items-center gap-2 shadow-xl text-sm sm:text-base"><span class="text-xl">⬇️</span> Exportar PDF</button><button onclick="closeModal()" class="px-5 sm:px-8 py-3 sm:py-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-2xl font-bold transition-colors text-sm sm:text-base">✕ Fechar</button></div></div><div class="flex-1 overflow-auto bg-slate-100 p-4 sm:p-8" id="pdfPreviewContainer"></div></div></div>
+    <div id="larPdfModal" class="hidden fixed inset-0 modal-overlay z-[100] flex items-center justify-center p-3 sm:p-4"><div class="bg-white rounded-3xl max-w-5xl w-full max-h-[95vh] overflow-hidden flex flex-col shadow-2xl mx-2 sm:mx-0"><div class="flex flex-wrap justify-between items-center gap-3 border-b border-slate-200 px-5 sm:px-8 py-4 sm:py-6 bg-gradient-to-r from-pink-50 to-rose-50"><div><h3 class="text-xl sm:text-2xl font-bold text-slate-900">🏖️ Pré-visualização do Recibo</h3><p class="text-sm sm:text-base text-slate-600 mt-1">Licença Anual Remunerada</p></div><div class="flex gap-3"><button onclick="downloadLARPDF()" class="btn-success px-5 sm:px-8 py-3 sm:py-4 text-white rounded-2xl font-bold flex items-center gap-2 shadow-xl text-sm sm:text-base"><span class="text-xl">⬇️</span> Exportar PDF</button><button onclick="closeLARPdfModal()" class="px-5 sm:px-8 py-3 sm:py-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-2xl font-bold transition-colors text-sm sm:text-base">✕ Fechar</button></div></div><div class="flex-1 overflow-auto bg-slate-100 p-4 sm:p-8" id="larPdfPreviewContainer"></div></div></div>
 
+    <!-- Templates PDF ocultos (mesmo conteúdo anterior) -->
     <div id="pdf-template" style="display:none;"><div id="pdf-content"><div class="pdf-page"><div class="pdf-header"><div class="pdf-title">📋 RCT-PJ</div><div class="pdf-subtitle">Relatório Completo de Rescisão Contratual - Prestador PJ</div></div><div class="pdf-section-block"><div class="pdf-section-title">🏢 Dados das Partes</div><div class="pdf-info-grid"><div class="pdf-info-box"><div class="pdf-label">Contratante</div><div class="pdf-value" id="pdf-contratante"></div></div><div class="pdf-info-box alt"><div class="pdf-label">Prestador</div><div class="pdf-value" id="pdf-prestador"></div></div></div><div class="pdf-info-grid"><div class="pdf-info-box"><div class="pdf-label">CNPJ Contratante</div><div class="pdf-value" id="pdf-cnpj-contratante"></div></div><div class="pdf-info-box alt"><div class="pdf-label">CNPJ/CPF Prestador</div><div class="pdf-value" id="pdf-cnpj-prestador"></div></div></div><div class="pdf-info-grid"><div class="pdf-info-box"><div class="pdf-label">Período da Relação Contratual</div><div class="pdf-value" id="pdf-periodo"></div></div><div class="pdf-info-box alt"><div class="pdf-label">Data de Pagamento</div><div class="pdf-value" id="pdf-data-pagamento"></div></div></div><div class="pdf-info-box"><div class="pdf-label">Natureza do Serviço</div><div class="pdf-value" id="pdf-natureza"></div></div><div class="pdf-info-box" style="border-left-color:#10b981;"><div class="pdf-label">Remuneração Contratual Mensal</div><div class="pdf-value pdf-value-large" id="pdf-remuneracao"></div></div></div><div class="pdf-footer"><p>Documento gerado pela RCT-PJ • Cálculo baseado em mês comercial de 30 dias</p></div><div class="pdf-page-number">Página 1</div></div><div class="pdf-page"><div class="pdf-section-block"><div class="pdf-section-title">💰 Verbas Rescisórias</div><div id="pdf-verbas-container"></div></div><div class="pdf-total-box"><div class="pdf-total-label">💵 Total a Receber</div><div class="pdf-total-valor" id="pdf-total"></div><div class="pdf-data-pagamento">Pagamento previsto para: <span id="pdf-data-pagamento-total"></span></div></div><div class="pdf-footer"><p>Documento gerado pela RCT-PJ • Cálculo baseado em mês comercial de 30 dias</p></div><div class="pdf-page-number">Página 2</div></div><div class="pdf-page"><div class="pdf-quitacao"><h4>📝 Termo de Quitação Geral</h4><p>O Prestador declara que concorda integralmente com os valores das verbas rescisórias constantes neste documento e que recebeu o pagamento total de todas as quantias devidas em razão do encerramento da relação contratual de prestação de serviços.</p><p>Desta forma, o Prestador dá plena, geral, irrevogável e irretratável quitação ao Contratante, nada mais tendo a reclamar, seja na Justiça do Trabalho, Justiça Comum ou fora dela, a qualquer título, em razão do contrato ora rescindido.</p><p style="margin-top:12px;font-weight:600;">Este documento foi emitido em duas vias de igual teor e forma e deve ser assinado por ambas as partes.</p></div><div class="pdf-assinaturas"><div class="pdf-assinatura"><div class="pdf-linha-assinatura"></div><div class="pdf-assinatura-nome" id="pdf-assinatura-contratante"></div><div class="pdf-assinatura-cargo">CONTRATANTE</div></div><div class="pdf-assinatura"><div class="pdf-linha-assinatura"></div><div class="pdf-assinatura-nome" id="pdf-assinatura-prestador"></div><div class="pdf-assinatura-cargo">PRESTADOR (PJ)</div></div></div><div class="pdf-footer"><p>Documento gerado automaticamente pela RCT-PJ em <span id="pdf-data-geracao"></span></p><p>Cálculo com base em mês comercial de 30 dias • Fuso horário Brasília (UTC-3)</p></div><div class="pdf-page-number">Página 3</div></div></div></div>
-
     <div id="lar-pdf-template" style="display:none;"><div id="lar-pdf-content"><div class="pdf-page"><div class="pdf-header" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);"><div class="pdf-title">🏖️ LICENÇA ANUAL REMUNERADA</div><div class="pdf-subtitle">Recibo de Cálculo - Prestador PJ (MEI)</div></div><div class="pdf-section-block"><div class="pdf-section-title">🏢 Dados do Contratante (Fonte Pagadora)</div><div class="pdf-info-grid"><div class="pdf-info-box"><div class="pdf-label">Contratante</div><div class="pdf-value" id="lar-pdf-contratante"></div></div><div class="pdf-info-box alt"><div class="pdf-label">CNPJ</div><div class="pdf-value" id="lar-pdf-cnpj-contratante"></div></div></div></div><div class="pdf-section-block"><div class="pdf-section-title">📋 Dados do Prestador</div><div class="pdf-info-grid"><div class="pdf-info-box"><div class="pdf-label">Prestador</div><div class="pdf-value" id="lar-pdf-prestador"></div></div><div class="pdf-info-box alt"><div class="pdf-label">CNPJ/CPF</div><div class="pdf-value" id="lar-pdf-cnpj"></div></div></div><div class="pdf-info-box" style="border-left-color:#ec4899;"><div class="pdf-label">Remuneração Mensal Contratual</div><div class="pdf-value pdf-value-large" id="lar-pdf-remuneracao" style="color:#ec4899;"></div></div></div><div class="pdf-section-block"><div class="pdf-section-title">📅 Período de Afastamento</div><div class="pdf-info-grid"><div class="pdf-info-box"><div class="pdf-label">Data Inicial</div><div class="pdf-value" id="lar-pdf-data-inicio"></div></div><div class="pdf-info-box alt"><div class="pdf-label">Data Final</div><div class="pdf-value" id="lar-pdf-data-fim"></div></div></div><div class="pdf-info-grid"><div class="pdf-info-box"><div class="pdf-label">Total de Dias</div><div class="pdf-value" id="lar-pdf-total-dias"></div></div><div class="pdf-info-box alt"><div class="pdf-label">Tipo de Cálculo</div><div class="pdf-value" id="lar-pdf-tipo"></div></div></div></div><div class="pdf-footer"><p>Documento gerado pela RCT-PJ • Cálculo baseado em mês comercial de 30 dias</p></div><div class="pdf-page-number">Página 1</div></div><div class="pdf-page"><div class="pdf-section-block"><div class="pdf-section-title">💰 Detalhamento do Cálculo</div><div id="lar-pdf-calculo-container"></div></div><div class="pdf-section-block"><div class="pdf-section-title">📋 Dias Remanescentes em Folha</div><div id="lar-pdf-remanescentes-container"></div></div><div class="pdf-total-box" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);"><div class="pdf-total-label">💵 Valor Bruto a Receber</div><div class="pdf-total-valor" id="lar-pdf-valor-total"></div><div class="pdf-data-pagamento">Referente à Licença Anual Remunerada</div></div><div class="pdf-quitacao" style="border-left-color:#ec4899;"><h4>📝 Observações Importantes</h4><p>Este recibo documenta o cálculo da Licença Anual Remunerada conforme direito do prestador PJ (MEI) a cada 12 meses de serviço, correspondendo a uma remuneração mensal acrescida de 1/3.</p><p>O cálculo considera o impacto no mês corrente, caso o afastamento não coincida com o início ou fim do mês, respeitando o calendário de 28 a 31 dias.</p></div><div class="pdf-footer"><p>Documento gerado automaticamente pela RCT-PJ em <span id="lar-pdf-data-geracao"></span></p><p>Cálculo com base em mês comercial de 30 dias • Fuso horário Brasília (UTC-3)</p></div><div class="pdf-page-number">Página 2</div></div></div></div>
 
     <script>
         let calculoData = null, larCalculoData = null;
+        let toastTimeout = null;
+        
+        function fecharToast() {
+            const toast = document.getElementById('successToast');
+            toast.classList.remove('show');
+            if (toastTimeout) clearTimeout(toastTimeout);
+        }
+        
+        function showSuccessToast(message, autoScroll = true) {
+            const toast = document.getElementById('successToast');
+            const msgSpan = document.getElementById('toastMessage');
+            msgSpan.innerText = message;
+            toast.classList.add('show');
+            if (autoScroll) {
+                setTimeout(() => {
+                    const dashboard = document.getElementById('dashboard');
+                    if (dashboard && !dashboard.classList.contains('hidden')) {
+                        dashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        window.scrollBy({ top: 300, behavior: 'smooth' });
+                    }
+                }, 100);
+            }
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 5000);
+        }
+        
+        function limparCampoPadrao(input, valorPadrao) {
+            if (input.value === valorPadrao) {
+                input.value = '';
+            }
+        }
+        
         function formatarMoedaInput(input, hiddenFieldId) { const fieldId = hiddenFieldId||'remuneracao'; let valor = input.value.replace(/\D/g,''); valor = (parseInt(valor)/100).toFixed(2); if(isNaN(valor)||valor==='NaN'){ input.value='0,00'; document.getElementById(fieldId).value='0'; return; } const partes = valor.split('.'); const inteiro = parseInt(partes[0]).toLocaleString('pt-BR'); const decimal = partes[1]; input.value = inteiro+','+decimal; document.getElementById(fieldId).value = valor; }
         document.addEventListener('DOMContentLoaded',()=>{ const inp = document.getElementById('remuneracao_display'); if(inp.value) formatarMoedaInput(inp); });
         function formatarMoeda(v){ return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2}).format(v); }
@@ -179,9 +274,9 @@
             const multa=aviso?0:rem;
             const total=grat+valComp+valorRes+valCompAnual+multa;
             calculoData={ contratante:document.getElementById('contratante').value, cnpjContratante:document.getElementById('cnpj_contratante').value, prestador:document.getElementById('prestador').value, cnpjPrestador:document.getElementById('cnpj_prestador').value, natureza:document.getElementById('natureza').value, remuneracao:rem, dataInicio:formatarData(di), dataTermino:formatarData(dt), dataPagamento:formatarData(dp), gratificacaoEspecial:grat, valorCompensacao:valComp, valorResiduo:valorRes, diasResiduo:diasRes, valorCompensatoriaAnual:valCompAnual, valorMulta:multa, total };
-            renderDashboard(); document.getElementById('dashboard').classList.remove('hidden'); document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
+            renderDashboard(); document.getElementById('dashboard').classList.remove('hidden'); showSuccessToast("✅ Rescisão calculada com sucesso! Role para baixo e veja o resumo completo.", true);
         }
-        function renderDashboard(){ const d=calculoData; const c=document.getElementById('verbas-container'); let h=`<div class="result-card animate-slide-up" style="border-left:5px solid #10b981;"><div class="flex justify-between items-start"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-success text-base">💰 Gratificação</span></div><p class="font-bold text-xl text-slate-900 mb-1">Gratificação Especial</p><p class="text-base text-slate-600">1/12 por fração de mês (superior a 14 dias) no ano corrente.</p></div><p class="text-3xl font-bold text-emerald-600">${formatarMoeda(d.gratificacaoEspecial)}</p></div></div><div class="result-card animate-slide-up" style="animation-delay:0.1s;border-left:5px solid #3b82f6;"><div class="flex justify-between items-start"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-info text-base">📊 Compensação</span></div><p class="font-bold text-xl text-slate-900 mb-1">Compensação por Serviços Adicionais</p><p class="text-base text-slate-600">1/12 por fração de mês (superior a 14 dias) + adicional de 1/3.</p></div><p class="text-3xl font-bold text-blue-600">${formatarMoeda(d.valorCompensacao)}</p></div></div><div class="result-card animate-slide-up" style="animation-delay:0.2s;border-left:5px solid #8b5cf6;"><div class="flex justify-between items-start"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-success text-base">📅 Resíduo</span></div><p class="font-bold text-xl text-slate-900 mb-1">Resíduo Contratual</p><p class="text-base text-slate-600">${d.diasResiduo} dias</p></div><p class="text-3xl font-bold text-violet-600">${formatarMoeda(d.valorResiduo)}</p></div></div>`; if(d.valorCompensatoriaAnual>0) h+=`<div class="result-card animate-slide-up" style="animation-delay:0.3s;border-left:5px solid #f59e0b;"><div class="flex justify-between items-start"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-warning text-base">⚡ Compensatória</span></div><p class="font-bold text-xl text-slate-900 mb-1">Verba Compensatória Anual</p><p class="text-base text-slate-600">Não foi paga durante o contrato (remuneração mensal + 1/3)</p></div><p class="text-3xl font-bold text-amber-600">${formatarMoeda(d.valorCompensatoriaAnual)}</p></div></div>`; if(d.valorMulta>0) h+=`<div class="result-card animate-slide-up" style="animation-delay:0.4s;border-left:5px solid #ef4444;"><div class="flex justify-between items-start"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-danger text-base">⚠️ Multa</span></div><p class="font-bold text-xl text-rose-700 mb-1">Multa Contratual</p><p class="text-base text-rose-600">Falta de aviso prévio de 30 dias</p></div><p class="text-3xl font-bold text-rose-600">${formatarMoeda(d.valorMulta)}</p></div></div>`; c.innerHTML=h; document.getElementById('total-geral').innerHTML=formatarMoeda(d.total); document.getElementById('data_pagamento_display').innerHTML=`📅 Pagamento previsto para <span class="font-bold text-white">${d.dataPagamento}</span>`; }
+        function renderDashboard(){ const d=calculoData; const c=document.getElementById('verbas-container'); let h=`<div class="result-card animate-slide-up" style="border-left:5px solid #10b981;"><div class="flex justify-between items-start flex-wrap gap-3"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-success text-sm">💰 Gratificação</span></div><p class="font-bold text-lg sm:text-xl text-slate-900 mb-1">Gratificação Especial</p><p class="text-sm text-slate-600">1/12 por fração de mês (superior a 14 dias) no ano corrente.</p></div><p class="text-2xl sm:text-3xl font-bold text-emerald-600">${formatarMoeda(d.gratificacaoEspecial)}</p></div></div><div class="result-card animate-slide-up" style="animation-delay:0.1s;border-left:5px solid #3b82f6;"><div class="flex justify-between items-start flex-wrap gap-3"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-info text-sm">📊 Compensação</span></div><p class="font-bold text-lg sm:text-xl text-slate-900 mb-1">Compensação por Serviços Adicionais</p><p class="text-sm text-slate-600">1/12 por fração de mês (superior a 14 dias) + adicional de 1/3.</p></div><p class="text-2xl sm:text-3xl font-bold text-blue-600">${formatarMoeda(d.valorCompensacao)}</p></div></div><div class="result-card animate-slide-up" style="animation-delay:0.2s;border-left:5px solid #8b5cf6;"><div class="flex justify-between items-start flex-wrap gap-3"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-success text-sm">📅 Resíduo</span></div><p class="font-bold text-lg sm:text-xl text-slate-900 mb-1">Resíduo Contratual</p><p class="text-sm text-slate-600">${d.diasResiduo} dias</p></div><p class="text-2xl sm:text-3xl font-bold text-violet-600">${formatarMoeda(d.valorResiduo)}</p></div></div>`; if(d.valorCompensatoriaAnual>0) h+=`<div class="result-card animate-slide-up" style="animation-delay:0.3s;border-left:5px solid #f59e0b;"><div class="flex justify-between items-start flex-wrap gap-3"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-warning text-sm">⚡ Compensatória</span></div><p class="font-bold text-lg sm:text-xl text-slate-900 mb-1">Verba Compensatória Anual</p><p class="text-sm text-slate-600">Não foi paga durante o contrato (remuneração mensal + 1/3)</p></div><p class="text-2xl sm:text-3xl font-bold text-amber-600">${formatarMoeda(d.valorCompensatoriaAnual)}</p></div></div>`; if(d.valorMulta>0) h+=`<div class="result-card animate-slide-up" style="animation-delay:0.4s;border-left:5px solid #ef4444;"><div class="flex justify-between items-start flex-wrap gap-3"><div><div class="flex items-center gap-2 mb-2"><span class="badge badge-danger text-sm">⚠️ Multa</span></div><p class="font-bold text-lg sm:text-xl text-rose-700 mb-1">Multa Contratual</p><p class="text-sm text-rose-600">Falta de aviso prévio de 30 dias</p></div><p class="text-2xl sm:text-3xl font-bold text-rose-600">${formatarMoeda(d.valorMulta)}</p></div></div>`; c.innerHTML=h; document.getElementById('total-geral').innerHTML=formatarMoeda(d.total); document.getElementById('data_pagamento_display').innerHTML=`📅 Pagamento previsto para <span class="font-bold text-white">${d.dataPagamento}</span>`; }
         function openLARModal(){ const r=document.getElementById('remuneracao').value; if(r){ document.getElementById('lar_remuneracao').value=r; document.getElementById('lar_remuneracao_display').value=document.getElementById('remuneracao_display').value; } document.getElementById('larModal').classList.remove('hidden'); document.getElementById('larModal').classList.add('flex'); }
         function closeLARModal(){ document.getElementById('larModal').classList.add('hidden'); document.getElementById('larModal').classList.remove('flex'); document.getElementById('larResultado').classList.add('hidden'); }
         function calcularDataFim(){ const i=document.getElementById('lar_data_inicio').value, d=parseInt(document.getElementById('lar_dias_afastamento').value)||0; if(!i||d<=0) return; const ini=new Date(i+'T00:00:00-03:00'), fim=new Date(ini); fim.setDate(fim.getDate()+d-1); document.getElementById('lar_data_fim').value=`${fim.getFullYear()}-${String(fim.getMonth()+1).padStart(2,'0')}-${String(fim.getDate()).padStart(2,'0')}`; }
@@ -192,51 +287,27 @@
             const ini=new Date(iStr+'T00:00:00-03:00'), fim=new Date(fStr+'T23:59:59-03:00'); if(ini>fim){ alert('Data inicial não pode ser maior que data final'); return; }
             const vDiario=rem/30;
             let valorBruto, descricaoCalculo, terco, valorTotal;
-            if(tipo==='integral'){
-                valorBruto = rem; // apenas a remuneração mensal
-                terco = rem/3;
-                valorTotal = valorBruto + terco;
-                descricaoCalculo = `Remuneração mensal completa (30 dias)`;
-            } else {
-                valorBruto = dias * vDiario;
-                terco = valorBruto/3;
-                valorTotal = valorBruto + terco;
-                descricaoCalculo = `${dias} dias × ${formatarMoeda(vDiario)} (valor diário)`;
-            }
-
-            // Cálculo dos dias remanescentes em folha (baseado em mês comercial de 30 dias)
+            if(tipo==='integral'){ valorBruto = rem; terco = rem/3; valorTotal = valorBruto + terco; descricaoCalculo = `Remuneração mensal completa (30 dias)`; }
+            else { valorBruto = dias * vDiario; terco = valorBruto/3; valorTotal = valorBruto + terco; descricaoCalculo = `${dias} dias × ${formatarMoeda(vDiario)} (valor diário)`; }
             let diasAntes=0, diasDepois=0, valorDiasAntes=0, valorDiasDepois=0, descAntes='', descDepois='';
-            if(tipo!=='integral'){ // no integral não há dias remanescentes pois cobre o mês todo
+            if(tipo!=='integral'){ 
                 const anoIni=ini.getFullYear(), mesIni=ini.getMonth(), diaIni=ini.getDate();
                 const anoFim=fim.getFullYear(), mesFim=fim.getMonth(), diaFim=fim.getDate();
                 if(anoIni===anoFim && mesIni===mesFim){
                     const diasTrab = 30 - dias;
-                    if(diasTrab>0){
-                        diasAntes = diasTrab;
-                        valorDiasAntes = diasTrab * vDiario;
-                        descAntes = `Dias trabalhados no mês (${ini.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}): ${diasTrab} dias = ${formatarMoeda(valorDiasAntes)}`;
-                    }
+                    if(diasTrab>0){ diasAntes = diasTrab; valorDiasAntes = diasTrab * vDiario; descAntes = `Dias trabalhados no mês (${ini.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}): ${diasTrab} dias = ${formatarMoeda(valorDiasAntes)}`; }
                 } else {
                     const ultimoDiaIni = new Date(anoIni, mesIni+1, 0).getDate();
                     const diasLicIni = Math.min(dias, ultimoDiaIni - diaIni + 1);
                     const diasTrabIni = 30 - diasLicIni;
-                    if(diasTrabIni>0){
-                        diasAntes = diasTrabIni;
-                        valorDiasAntes = diasTrabIni * vDiario;
-                        descAntes = `Dias trabalhados antes da licença (${ini.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}): ${diasTrabIni} dias = ${formatarMoeda(valorDiasAntes)}`;
-                    }
+                    if(diasTrabIni>0){ diasAntes = diasTrabIni; valorDiasAntes = diasTrabIni * vDiario; descAntes = `Dias trabalhados antes da licença (${ini.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}): ${diasTrabIni} dias = ${formatarMoeda(valorDiasAntes)}`; }
                     const diasLicFim = diaFim;
                     const diasTrabFim = 30 - diasLicFim;
-                    if(diasTrabFim>0){
-                        diasDepois = diasTrabFim;
-                        valorDiasDepois = diasTrabFim * vDiario;
-                        descDepois = `Dias trabalhados após a licença (${fim.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}): ${diasTrabFim} dias = ${formatarMoeda(valorDiasDepois)}`;
-                    }
+                    if(diasTrabFim>0){ diasDepois = diasTrabFim; valorDiasDepois = diasTrabFim * vDiario; descDepois = `Dias trabalhados após a licença (${fim.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}): ${diasTrabFim} dias = ${formatarMoeda(valorDiasDepois)}`; }
                 }
             }
-
             larCalculoData = { remuneracao:rem, dataInicio:formatarData(ini), dataFim:formatarData(fim), totalDias:dias, tipo, valorBruto, terco, valorTotal, descricaoCalculo, diasAntes, diasDepois, valorDiasAntes, valorDiasDepois, descAntes, descDepois, dataInicioObj:ini, dataFimObj:fim };
-            renderLARResultado();
+            renderLARResultado(); showSuccessToast("🏖️ Licença Anual calculada! Confira os valores abaixo.", true);
         }
         function renderLARResultado(){
             const d=larCalculoData;
@@ -250,9 +321,7 @@
                 if(d.diasAntes>0) html+=`<p style="font-size:0.875rem;color:#1e40af;margin-bottom:8px;">${d.descAntes}</p>`;
                 if(d.diasDepois>0) html+=`<p style="font-size:0.875rem;color:#1e40af;">${d.descDepois}</p>`;
                 html+=`</div></div>`;
-            } else {
-                html+=`<div class="lar-result-card" style="border-left-color:#94a3b8;"><div class="lar-result-label">Dias Remanescentes em Folha</div><p style="font-size:0.875rem;color:#475569;">Não há dias trabalhados no mês de início ou término fora do período de licença.</p></div>`;
-            }
+            } else { html+=`<div class="lar-result-card" style="border-left-color:#94a3b8;"><div class="lar-result-label">Dias Remanescentes em Folha</div><p style="font-size:0.875rem;color:#475569;">Não há dias trabalhados no mês de início ou término fora do período de licença.</p></div>`; }
             html+=`<div class="lar-result-card" style="border-left-color:#10b981; background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);"><div class="lar-result-label">VALOR TOTAL A RECEBER</div><div class="lar-result-value" style="color:#059669; font-size:2rem;">${formatarMoeda(d.valorTotal)}</div></div>`;
             container.innerHTML=html;
             document.getElementById('larResultado').classList.remove('hidden');
@@ -270,7 +339,7 @@
             document.getElementById('lar-pdf-tipo').textContent=larCalculoData.tipo==='integral'?'Integral (30 dias)':'Proporcional';
             document.getElementById('lar-pdf-data-geracao').textContent=new Date().toLocaleDateString('pt-BR');
             const calcC=document.getElementById('lar-pdf-calculo-container');
-            calcC.innerHTML=`<div class="pdf-verba-card"><div class="pdf-verba-info"><h4>💰 Valor Broto (${larCalculoData.tipo==='integral'?'Integral':'Proporcional'})</h4><p>${larCalculoData.descricaoCalculo}</p></div><div class="pdf-verba-valor">${formatarMoeda(larCalculoData.valorBruto)}</div></div><div class="pdf-verba-card"><div class="pdf-verba-info"><h4>➕ Adicional de 1/3</h4></div><div class="pdf-verba-valor" style="color:#f59e0b;">${formatarMoeda(larCalculoData.terco)}</div></div>`;
+            calcC.innerHTML=`<div class="pdf-verba-card"><div class="pdf-verba-info"><h4>💰 Valor Bruto (${larCalculoData.tipo==='integral'?'Integral':'Proporcional'})</h4><p>${larCalculoData.descricaoCalculo}</p></div><div class="pdf-verba-valor">${formatarMoeda(larCalculoData.valorBruto)}</div></div><div class="pdf-verba-card"><div class="pdf-verba-info"><h4>➕ Adicional de 1/3</h4></div><div class="pdf-verba-valor" style="color:#f59e0b;">${formatarMoeda(larCalculoData.terco)}</div></div>`;
             const remanC=document.getElementById('lar-pdf-remanescentes-container');
             let remanHTML='';
             if(larCalculoData.diasAntes>0||larCalculoData.diasDepois>0){
@@ -288,8 +357,8 @@
         function previewPDF(){ if(!calculoData){ alert("Realize o cálculo primeiro."); return; } const c=generatePDFContent(); const p=document.getElementById('pdfPreviewContainer'); p.innerHTML=''; p.appendChild(c); document.getElementById('pdfModal').classList.remove('hidden'); document.getElementById('pdfModal').classList.add('flex'); }
         function downloadPDF(){ if(!calculoData) return; const e=document.getElementById('pdf-content'); const opt={ margin:[10,10,10,10], filename:`RCT-PJ_Rescisao_${calculoData.prestador.replace(/[^a-zA-Z0-9]/g,'_')}_${new Date().toISOString().slice(0,10)}.pdf`, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2,useCORS:true,letterRendering:true,scrollY:0}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}, pagebreak:{mode:['css-class'],before:[],after:[],avoid:['.pdf-section-block','.pdf-verba-card','.pdf-total-box','.pdf-quitacao','.pdf-assinaturas']} }; html2pdf().set(opt).from(e).toPdf().get('pdf').then(function(pdf){ const total=pdf.internal.getNumberOfPages(); for(let i=total;i>0;i--) if(i>3) pdf.deletePage(i); }).save(); }
         function closeModal(){ const m=document.getElementById('pdfModal'); m.classList.add('hidden'); m.classList.remove('flex'); }
-        function resetForm(){ document.getElementById('rescisaoForm').reset(); document.getElementById('dashboard').classList.add('hidden'); document.getElementById('compensatoria_container').classList.add('hidden'); calculoData=null; document.getElementById('data_inicio').value='2025-01-15'; document.getElementById('data_termino').value='2026-03-30'; document.getElementById('data_pagamento').value='2026-03-30'; document.getElementById('remuneracao_display').value='3.500,00'; document.getElementById('remuneracao').value='3500'; }
-        document.addEventListener('DOMContentLoaded',()=>{ const aviso=document.getElementById('aviso_previo_concedido'), info=document.getElementById('multa_info'); aviso.addEventListener('change',()=>info.classList.toggle('hidden',aviso.checked)); console.log('%c✅ RCT-PJ com Licença Anual Remunerada - Versão Corrigida!','color:#ec4899; font-weight:600; font-size:14px;'); });
+        function resetForm(){ document.getElementById('rescisaoForm').reset(); document.getElementById('dashboard').classList.add('hidden'); document.getElementById('compensatoria_container').classList.add('hidden'); calculoData=null; document.getElementById('data_inicio').value='2025-01-15'; document.getElementById('data_termino').value='2026-03-30'; document.getElementById('data_pagamento').value='2026-03-30'; document.getElementById('remuneracao_display').value='3.500,00'; document.getElementById('remuneracao').value='3500'; showSuccessToast("🔄 Formulário reiniciado. Preencha os dados novamente.", false); }
+        document.addEventListener('DOMContentLoaded',()=>{ const aviso=document.getElementById('aviso_previo_concedido'), info=document.getElementById('multa_info'); aviso.addEventListener('change',()=>info.classList.toggle('hidden',aviso.checked)); });
     </script>
 </body>
 </html>
