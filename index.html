@@ -277,7 +277,7 @@
         function formatarMoeda(v){ return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',minimumFractionDigits:2}).format(v); }
         function formatarData(d){ return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}); }
         function diasEntre(d1,d2){ const umDia=1000*60*60*24; return Math.floor((d2.getTime()-d1.getTime())/umDia)+1; }
-        function calcularFracaoMes(d){ if(d<=14) return 0; return Math.ceil(d/30); }
+        function calcularFracaoMes(d){ const mesesCompletos=Math.floor(d/30); const diasResiduais=d%30; return mesesCompletos+(diasResiduais>14?1:0); }
         function verificarDuracaoContrato(){ const i=document.getElementById('data_inicio').value,t=document.getElementById('data_termino').value; if(!i||!t) return; const di=new Date(i+'T00:00:00-03:00'), dt=new Date(t+'T23:59:59-03:00'), dc=diasEntre(di,dt); const c=document.getElementById('compensatoria_container'); if(dc>365) c.classList.remove('hidden'); else c.classList.add('hidden'); }
         function calcularRescisao(){
             const rem=parseFloat(document.getElementById('remuneracao').value), iStr=document.getElementById('data_inicio').value, tStr=document.getElementById('data_termino').value, pStr=document.getElementById('data_pagamento').value;
